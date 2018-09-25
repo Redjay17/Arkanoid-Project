@@ -21,6 +21,13 @@ public class Paddle {
 	}
 	
 	/**
+	 * Moves the paddle according to the input of the player.
+	 */
+	public void move() {
+		
+	}
+	
+	/**
 	 * The paddle can only collide with two objects: the ball object and the boundary object.
 	 * In the boundary case, it will simply stop the paddle.
 	 * In the ball case, the ball will change direction and increase in speed.
