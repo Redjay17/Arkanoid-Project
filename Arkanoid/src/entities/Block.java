@@ -13,21 +13,21 @@ import powerups.PowerUp;
  */
 public class Block {
 	public int health;
-	public int size;
-	public int chanceToDropPowerUp;
-	public boolean unbreakable;
-	public ArrayList<PowerUp> powerupDrops;
+	private int size;
+	private int chanceToDropPowerUp;
+	private boolean unbreakable;
+	private ArrayList<PowerUp> powerupDrops;
 
 	public Block() {
 		
 	}
 	
 	/**
-	 * onHit alters the health of the block. If the block has no health, then
+	 * onCollision alters the health of the block. If the block has no health, then
 	 * the block is removed. If block is removed, determine if it should
 	 * drop a powerup or not.
 	 */
-	public void onHit() {
+	public void onCollision() {
 		
 	}
 	
@@ -48,7 +48,7 @@ public class Block {
 	}
 	
 	public boolean getUnbreakable() {
-		
+		return unbreakable;
 	}
 	
 	

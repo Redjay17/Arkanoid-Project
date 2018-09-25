@@ -9,11 +9,28 @@ package entities;
  * @author Team 5
  *
  */
-public class Boundary {
+public class Boundary extends Block {
 	public int size;
 	public boolean removesBallOnCollision;
 	
 	public Boundary() {
 		
+	}
+	
+	/**
+	 * On collision, the ball will either do two actions
+	 * 1) Change direction and increase in speed
+	 * 2) Be removed from the game if collides with the bottom boundary.
+	 */
+	public void onCollision() {
+		
+	}
+	
+	/**
+	 * Will always return false because boundaries cannot be removed from the game.
+	 * @return false always
+	 */
+	public boolean isDead() {
+		return false;
 	}
 }

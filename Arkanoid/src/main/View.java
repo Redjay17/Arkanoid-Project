@@ -36,4 +36,12 @@ public class View {
 	public void addToQueue() {
 		
 	}
+	
+	/**
+	 * Detects if a collision occurred between two objects. Sends info to controller.
+	 */
+	
+	public void detectCollision() {
+		
+	}
 }

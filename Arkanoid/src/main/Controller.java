@@ -15,7 +15,10 @@ public class Controller {
 		
 	}
 	
-	public void updatePlayerLocation() {
+	/**
+	 * Updates the game's info according to changes within the game.
+	 */
+	public void updateGameInfo() {
 		
 	}
 	

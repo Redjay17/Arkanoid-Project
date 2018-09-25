@@ -10,11 +10,22 @@ package entities;
 public class Ball {
 	public int speed;
 	public int timesHit;
+	public double xPos;
+	public double yPos;
 	public double xDirection;
 	public double yDirection;
 	public double diameter;
 	
 	public Ball() {
+		
+	}
+	
+	/**
+	 * When a ball hits a collision, it will react according to which object it hit.
+	 * Block - Reduces health if possible
+	 * Paddle, block, boundary - Change direction of ball. Increase speed.
+	 */
+	public void onCollision() {
 		
 	}
 }

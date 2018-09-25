@@ -16,5 +16,17 @@ public class Paddle {
 	public int yPos;
 	public int xPos;
 	
+	public Paddle() {
+		
+	}
+	
+	/**
+	 * The paddle can only collide with two objects: the ball object and the boundary object.
+	 * In the boundary case, it will simply stop the paddle.
+	 * In the ball case, the ball will change direction and increase in speed.
+	 */
+	public void onCollision() {
+		
+	}
 	
 }
