@@ -1,4 +1,4 @@
-package Entities;
+package entities;
 
 /**
  * The ball class is the only way for blocks to be broken. 
@@ -14,7 +14,7 @@ public class Ball {
 	public double xDirection;
 	public double yDirection;
 	public double diameter;
-	double maxSpeed;
+	public double maxSpeed;
 	public int x_coord;
 	public int y_coord;
 	
