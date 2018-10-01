@@ -36,7 +36,7 @@ public class Block {
 	 * @return True if health < 0. False otherwise
 	 */
 	public boolean isDead() {
-		
+		return false;
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class Block {
 	 * @return True if random number is greater than drop chance. False otherwise.
 	 */
 	public boolean powerUpDropped() {
-		
+		return false;
 	}
 	
 	public boolean getUnbreakable() {
