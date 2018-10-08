@@ -8,6 +8,9 @@ package entities;
  * @author Team 5
  *
  */
+
+//test
+
 public class Ball {
 	public int speed;
 	public int timesHit;
