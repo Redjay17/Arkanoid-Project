@@ -9,7 +9,7 @@ package entities;
  *
  */
 
-//test
+//test. commit and push
 
 public class Ball {
 	public int speed;
