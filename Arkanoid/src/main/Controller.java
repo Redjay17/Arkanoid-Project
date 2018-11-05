@@ -2,6 +2,8 @@ package main;
 
 import java.util.Queue;
 
+import view.View;
+
 /**
  * Controls the state of the game with the View class passing messages to the controller. 
  * @author Team 5

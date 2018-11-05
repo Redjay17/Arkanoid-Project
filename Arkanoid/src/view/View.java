@@ -1,7 +1,9 @@
-package main;
+package view;
 
 import java.awt.Container;
 import java.util.Queue;
+
+import main.Model;
 
 /**
  * 
