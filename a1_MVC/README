@@ -1,0 +1,6 @@
+Controller is the main method.
+Do not look at View class. Window class is the real view class. 
+Left / Right to move, Space to shoot. The ball bounces around the map. 
+This is good because it means the physics of our game can be done using the MVC pattern.
+
+Now all I gotta do is re program map loading and bricks.
