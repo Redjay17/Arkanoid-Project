@@ -1,4 +1,4 @@
-package a7_Send;
+package a4_MVC;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -33,11 +33,11 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 	boolean firstShot = false;
 	int score = 0;
 	public static int borderThickness = 0;
-	public int maxBallDown = Window.fieldPanelLength - ball.getLength();
+	public int maxBallDown = Controller.fieldPanelLength - ball.getLength();
 	public int maxBallLeft = borderThickness;
-	public int maxBallRight = Window.fieldPanelWidth - borderThickness - ball.getWidth();
+	public int maxBallRight = Controller.fieldPanelWidth - borderThickness - ball.getWidth();
 	public final int maxPlayerLeftX = borderThickness;
-	public final int maxPlayerRightX = Window.fieldPanelWidth - player.getWidth() - borderThickness; // -
+	public final int maxPlayerRightX = Controller.fieldPanelWidth - player.getWidth() - borderThickness; // -
 																										// borderThickness
 	Color backgroundColor = Color.gray;
 	Color playerColor = Color.cyan;
@@ -62,6 +62,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 
 	public void loadMap(Map map) {
 		this.map = map;
+		
+		//clear the arraylist so it doesn't stack with bricks
 		bricks = new ArrayList<Brick>(map.getBricks());
 		player = new Player();
 		ball = new Ball(player);
@@ -78,20 +80,20 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 		Graphics2D g = (Graphics2D) gr;
 		// background
 		g.setColor(backgroundColor);
-		g.fillRect(0, 0, Window.fieldPanelWidth, Window.fieldPanelLength);
+		g.fillRect(0, 0, Controller.fieldPanelWidth, Controller.fieldPanelLength);
 
 		// draw map
 		paintMap(g, brickColor);
 		// Borders
 		g.setColor(borderColor);
 		// left border
-		g.fillRect(0, 0, borderThickness, Window.fieldPanelLength);
+		g.fillRect(0, 0, borderThickness, Controller.fieldPanelLength);
 		g.setColor(borderColor);
 		// top border
-		g.fillRect(0, 0, Window.fieldPanelWidth, borderThickness);
+		g.fillRect(0, 0, Controller.fieldPanelWidth, borderThickness);
 		g.setColor(borderColor);
 		// right border
-		g.fillRect(Window.fieldPanelWidth - borderThickness, 0, borderThickness, Window.fieldPanelLength);
+		g.fillRect(Controller.fieldPanelWidth - borderThickness, 0, borderThickness, Controller.fieldPanelLength);
 
 		// paddle
 		g.setColor(playerColor);
@@ -182,7 +184,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
 		// If they died, give them the old DarkSoulserino
 		if (!alive) {
 			g.setColor(Color.black);
-			g.fillRect(0, 0, Window.fieldPanelWidth, Window.fieldPanelWidth);
+			g.fillRect(0, 0, Controller.fieldPanelWidth, Controller.fieldPanelWidth);
 			ball.setxDir(0);
 			ball.setyDir(0);
 			g.setColor(Color.red);

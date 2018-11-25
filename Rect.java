@@ -1,4 +1,4 @@
-package a7_Send;
+package a4_MVC;
 
 /**
  * Ball, Player, and bricks are all things that can be built using fillRect, so

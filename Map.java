@@ -1,4 +1,4 @@
-package a7_Send;
+package a4_MVC;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

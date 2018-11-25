@@ -1,7 +1,8 @@
-package a7_Send;
+package a4_MVC;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.PriorityQueue;
 
 import javax.swing.JButton;
 
@@ -12,15 +13,14 @@ import javax.swing.JButton;
  *
  */
 public class MapButton extends JButton implements MouseListener {
-	Map map;
-	GamePanel panel;
+	PriorityQueue<Command> commands = Controller.commands;
+	Command command;
 
-	public MapButton(String title, Map map, GamePanel panel) {
-		super(title);
-		this.map = map;
-		this.panel = panel;
-		addMouseListener(this);
-		setFocusable(false);
+	public MapButton(String title, Command command) {
+	this.command = command;
+	setText(title);
+	addMouseListener(this);
+	setFocusable(false);
 	}
 
 	public void setMap(Map map) {
@@ -31,7 +31,7 @@ public class MapButton extends JButton implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		panel.loadMap(map);
+		commands.add(command);
 
 	}
 

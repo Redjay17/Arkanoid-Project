@@ -1,4 +1,4 @@
-package a7_Send;
+package a4_MVC;
 /**
  * Player is the paddle.
  * @author Leo_Le
@@ -13,8 +13,8 @@ public class Player extends Rect {
 	public int lives;
 
 	public Player() {
-		x = Window.fieldPanelWidth / 2 - initPlayerWidth / 2;
-		y = Window.fieldPanelLength - 95 + -initPlayerLength;
+		x = Controller.fieldPanelWidth / 2 - initPlayerWidth / 2;
+		y = Controller.fieldPanelLength - 95 + -initPlayerLength;
 		width = initPlayerWidth;
 		length = initPlayerLength;
 		lives = defaultlives;

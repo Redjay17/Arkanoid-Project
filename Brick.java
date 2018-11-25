@@ -1,4 +1,4 @@
-package a7_Send;
+package a4_MVC;
 
 /**
  * Rectangles are displayed or not displayed depending on that rectangle's
@@ -9,12 +9,16 @@ package a7_Send;
  *
  */
 public class Brick extends Rect {
+	public int defaultBrickLives = 1;
 	int lives = 1;
 
 	public Brick(int x, int y, int width, int length) {
 		super(x, y, width, length);
 	}
 
+	public void resetLives() {
+		lives = defaultBrickLives;
+	}
 	public int getLives() {
 		return lives;
 	}

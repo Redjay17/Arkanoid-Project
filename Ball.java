@@ -1,4 +1,4 @@
-package a7_Send;
+package a4_MVC;
 
 /**
  * The ball. Turns out the physics of the ball is just in swapping xDir / yDir
