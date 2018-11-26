@@ -1,56 +1,64 @@
 package entities;
 
 /**
- * The ball class is the only way for blocks to be broken. 
- * It changes direction When it collides with either the paddle, blocks, or the boundaries.
- * Each collision causes the ball to increase in speed. 
- * The ball is removed when it hits the bottom boundary. 
- * @author Team 5
+ * The ball. Turns out the physics of the ball is just in swapping xDir / yDir
+ * to make it change directions and stuff
+ * 
+ * @author Leo_Le
  *
  */
+public class Ball extends Rect {
 
-//test. commit and push
+	public int xDir = 0;
+	public int yDir = 0;
+	public int initBallSize = 10;
+	int ballSize = 10;
 
-public class Ball {
-	public int speed;
-	public int timesHit;
-	public double xDirection;
-	public double yDirection;
-	public double diameter;
-	public double maxSpeed;
-	public int x_coord;
-	public int y_coord;
-	
-	/**
-	 * constructs a ball with default diameter, will be determined.
-	 */
-	public Ball() {
-		
+	public Ball(int x, int y, int width, int length) {
+		super(x, y, width, length);
 	}
-	
+
 	/**
-	 * ball needs to initially launch in a direction
-	 * based off of paddle momentum
+	 * Ball's location during the initial creation is relative to player.
+	 * 
+	 * @param player
 	 */
-	public void Launch(){
-		
+	public Ball(Player player) {
+		x = player.getX() + player.getWidth() / 2 - initBallSize / 2;
+		y = player.getY() - initBallSize - 2;
+		width = initBallSize;
+		length = initBallSize;
 	}
-	
-	/**
-	 * Calculates where it will bounce next
-	 * and what direction it will throw the ball
-	 * stores the x and y in an array
-	 */
-	private int[] nextBounceDirection() {
-		return null;
-	
+
+	public int getxDir() {
+		return xDir;
 	}
-	
-	
-	/**
-	 * if ball isn't at max speed, increase the speed
-	 */
-	public void increaseSpeed() {
-		
+
+	public void setxDir(int xDir) {
+		this.xDir = xDir;
 	}
+
+	public int getyDir() {
+		return yDir;
+	}
+
+	public void setyDir(int yDir) {
+		this.yDir = yDir;
+	}
+
+	public void changexDir() {
+		xDir = -xDir;
+	}
+
+	public void changeyDir() {
+		yDir = -yDir;
+	}
+	public int getSize() {
+		return ballSize;
+	}
+
+	public void printBallInfo() {
+		System.out.println("Ball: " + y + " " + width + " " + length);
+	}
+
 }

@@ -1,63 +1,236 @@
 package main;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
-import entities.*;
+import entities.Ball;
+import entities.Block;
+import entities.Map;
+import entities.Player;
+import entities.Rect;
 
-/**
- * Model class stores information about the current game such as lives, score, the field,
- * and position/state of both the ball and paddle.
- * @author Team 5
- *
- */
 public class Model {
-	static int highScore;
+
+	Player player = new Player();
+	Ball ball = new Ball(player);
+	boolean alive = true;
+	boolean firstShot = false;
 	
-	int currLevel;
-	int currentScore;
-	int currLives;
-	Block[][] field;
-	Paddle paddle;
-	ArrayList<Ball> ball; //There may be multiple balls on the field.
+	private static final int DEFAULTLIVES = 3;
+	private int score = 0;
+	private int lives = DEFAULTLIVES;
 	
-	public Model() {
-		
+	public final int BORDERSIZE = 0;
+	public final int MAXBALLDOWNY = Controller.FIELDLENGTH - ball.getLength();
+	public final int MAXBALLLEFTX = BORDERSIZE;
+	public final int MAXBALLRIGHTX = Controller.FIELDWIDTH - BORDERSIZE - ball.getWidth();
+	public final int MAXPLAYERLEFTX = BORDERSIZE;
+	public final int MAXPLAYERRIGHTX = Controller.FIELDLENGTH - player.getWidth() - BORDERSIZE;
+	
+	Map map;
+	ArrayList<Block> bricks;
+
+	public ArrayList<Rect> getObjects() {
+		ArrayList<Rect> objects = new ArrayList<Rect>();
+		objects.add(player);
+		objects.add(ball);
+		return objects;
+
+	}
+
+	public ArrayList<Block> getBricks() {
+		return bricks;
+
+	}
+
+	public void loadMap(Map map) {
+		this.map = map;
+		// clear the arraylist so it doesn't stack with bricks
+		bricks = new ArrayList<Block>(map.getBricks());
+		alive = true;
+		firstShot = false;
+		player = new Player();
+		ball = new Ball(player);
+		score = 0;
+		for (Block brick : bricks) {
+			brick.resetLives();
+		}
+	}
+
+	public void restart() {
+		if (!alive) {
+			lives = DEFAULTLIVES;
+			alive = true;
+			firstShot = false;
+			player = new Player();
+			ball = new Ball(player);
+			score = 0;
+			for (Block brick : bricks) {
+				brick.resetLives();
+			}
+		}
+		else {
+			System.out.println("alive");
+		}
 	}
 	
-	/**
-	 * Changes the level field. A level reset is changing the level to it's current field.
-	 */
-	public void changeLevel() {
-		
+	private void startNewLife() {
+		firstShot = false;
+		player = new Player();
+		ball = new Ball(player);
+	}
+
+	public void shoot() {
+		if (!firstShot) {
+			// xdir and ydir being set means the ball starts moving
+			ball.setxDir(1);
+			ball.setyDir(2);
+			firstShot = true;
+			System.out.println("ball shot");
+		}
+	}
+
+	public void calculate() {
+		if (ball.getY() > MAXBALLDOWNY) {
+			lives--;
+			if(lives <= 0) {
+				alive = false;
+				player = new Player();
+				ball = new Ball(player);
+			}
+			else
+				startNewLife();
+		}
+
+		if (alive) {
+
+			// moves the ball
+			ball.setX(ball.getX() + ball.getxDir());
+			ball.setY(ball.getY() + ball.getyDir());
+
+			// intersect only works with
+			// rectangle objects
+			// checks if ball touches the paddle
+			Rectangle ballHitBox = new Rectangle(ball.getX(), ball.getY(), ball.getWidth(), ball.getLength());
+			Rectangle playerHitBox = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getLength());
+			if (ballHitBox.intersects(playerHitBox)) {
+				// first check if ball is inside player
+				if (ball.getX() + ball.getWidth() + 3 >= player.getX()
+						&& ball.getX() - 3 <= player.getX() + player.getWidth()
+						&& ball.getY() + ball.getLength() - 3 >= player.getY()) {
+
+					// is it in the left half of the player, move the player
+					// outside the panel to the left of it
+					if (ball.getX() + ball.getWidth() + 1 <= player.getX() + (player.getWidth() / 2)) {
+						ball.setX(player.getX() - 2 - ball.getWidth());
+						ball.setxDir(ball.getxDir() * -1);
+					}
+
+					// if it is inside the right half of the player..
+					if (ball.getX() - 1 >= player.getX() + (player.getWidth() / 2)) {
+						ball.setX(player.getX() + 2 + player.getWidth());
+						ball.setxDir(ball.getxDir() * -1);
+					}
+
+				} else {
+					// if the ball is not inside the player, just change its direction
+					ball.setyDir(ball.getyDir() * -1);
+				}
+				// notice how there is no code to check if the ball is left or right of the
+				// player, just
+				// whether it is inside to the left or inside to the right of the player.
+
+			}
+
+			for (int i = 0; i < bricks.size(); i++) {
+				Block brick = bricks.get(i);
+
+				// check if ball hits brick
+				Rectangle brickHitBox = new Rectangle(brick.getX(), brick.getY(), brick.getWidth(), brick.getLength());
+				if (brickHitBox.intersects(ballHitBox)) {
+					if (brick.isDead()) {
+					} else {
+						// System.out.println();
+						// System.out.println(brick.getLives());
+						// System.out.println("ball intersect brick");
+
+						// checks if ball is left OR right of brick
+						// if b
+						// if the ball hits a brick from above or below from the side
+						// ball's x will still be less/greater than bricks.
+						// so we need the + ballsize stuff
+						// basically, if ball's x is to the sides of brick when it collides with brick
+						// without the one pixel buffer for safety, it falsely jumps to Y
+						if (ball.getX() + ball.getWidth() - 1 <= brick.getX()
+								|| ball.getX() + 1 >= brick.getX() + brick.getWidth()) {
+							ball.changexDir();
+							// System.out.println("ball changed x dir");
+						} else {
+							// else ball is above or below brick.
+							ball.changeyDir();
+							// System.out.println("ball changed y dir");
+						}
+						// brick.printInfo();
+						brick.removeLife();
+						// System.out.println("life removed");
+						score = score + 10;
+						// brick.printInfo();
+						break;
+					}
+				}
+
+			}
+
+			// left corner
+			if (ball.getX() < MAXPLAYERLEFTX) {
+				ball.changexDir();
+			}
+			if (ball.getY() < BORDERSIZE) {
+				ball.changeyDir();
+			}
+			if (ball.getX() > MAXBALLRIGHTX) {
+				ball.changexDir();
+			}
+		}
+	}
+
+	public void moveRight() {
+		// don't let player leave map
+		if (player.getX() >= MAXPLAYERRIGHTX) {
+			player.setX(MAXPLAYERRIGHTX);
+		} else {
+			// move as normal
+			player.setX(player.getX() + player.getMoveSpeed());
+			if (!firstShot) {
+				ball.setX(ball.getX() + player.getMoveSpeed());
+			}
+		}
+	}
+
+	public void moveLeft() {
+		// don't let player leave map
+		if (player.getX() <= MAXPLAYERLEFTX) {
+			player.setX(MAXPLAYERLEFTX);
+		} else {
+			// move as normal
+			player.setX(player.getX() - player.getMoveSpeed());
+			if (!firstShot) {
+				ball.setX(ball.getX() - player.getMoveSpeed());
+			}
+
+		}
+	}
+
+	public boolean getAlive() {
+		return alive;
 	}
 	
-	/**
-	 * Starts the current level. The ball begins to move and the player can start moving.
-	 */
-	public void startLevel() {
-		
+	public int getScore() {
+		return score;
 	}
 	
-	/**
-	 * Ends the current level. The ball and paddle are reset to their original positions and states.
-	 */
-	public void endLevel() {
-		
+	public int getLives() {
+		return lives;
 	}
-	
-	/**
-	 * Pauses the game. All of the ball objects stop moving and the player cannot move the paddle until they resume.
-	 */
-	
-	public void pauseResume() {
-		
-	}
-	
-	/**
-	 * Reacts accordingly depending on which two objects collided.
-	 */
-	
-	public void onCollision() {
-		
-	}
+
 }
