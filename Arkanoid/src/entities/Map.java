@@ -1,6 +1,7 @@
 package entities;
 
 import entities.Block;
+
 import java.util.ArrayList;
 
 /**
@@ -11,7 +12,11 @@ import java.util.ArrayList;
  *
  */
 public class Map {
-	protected ArrayList<Block> bricks = new ArrayList<Block>();
+	protected ArrayList<Block> bricks;
+	
+	public Map() {
+		bricks = new ArrayList<Block>(); 
+	}
 
 	public ArrayList<Block> getBricks() {
 		return bricks;

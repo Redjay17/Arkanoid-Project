@@ -15,7 +15,7 @@ import main.Command;
  */
 public class MenuView extends JPanel {	
 	public static final int MENUWIDTH = 650;
-	public static final int MENULENGTH = 50;
+	public static final int MENULENGTH = 75;
 	
 	public MenuView() {
 		this.setLayout(new FlowLayout());
@@ -23,13 +23,16 @@ public class MenuView extends JPanel {
 		this.setBackground(Color.white); // Temporary.
 		this.setPreferredSize(new Dimension(MENUWIDTH, MENULENGTH));
 
-		MapButton owo = new MapButton("Load_Map_OWO", Command.MAP_OWO);
-		this.add(owo);
-
-		MapButton cs151 = new MapButton("Load_Map_CS151", Command.MAP_CS151);
-		this.add(cs151);
+		MapButton owo = new MapButton("Load Face Map", Command.MAP_OWO);
+		MapButton cs151 = new MapButton("Load Default Map", Command.MAP_CS151);
+		MapButton filled = new MapButton("Load Filled Map", Command.MAP_FILLED);
+		MapButton diamond = new MapButton("Load Diamond Map", Command.MAP_DIAMOND);
+		MapButton random = new MapButton("Load Random Map", Command.MAP_RANDOM);
 		
-		MapButton defaultMap = new MapButton("Load Default Map", Command.MAP_DEFAULT);
-		this.add(defaultMap);
+		this.add(owo);
+		this.add(cs151);
+		this.add(filled);
+		this.add(diamond);
+		this.add(random);
 	}
 }

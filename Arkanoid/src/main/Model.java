@@ -10,13 +10,14 @@ import entities.Player;
 import entities.Rect;
 
 public class Model {
-
-	Player player = new Player();
-	Ball ball = new Ball(player);
-	boolean alive = true;
-	boolean firstShot = false;
-	
+	private final boolean DEBUG = true;
 	private static final int DEFAULTLIVES = 3;
+
+	private Player player = new Player();
+	private Ball ball = new Ball(player);
+	
+	private boolean alive = true;
+	private boolean firstShot = false;
 	private int score = 0;
 	private int lives = DEFAULTLIVES;
 	
@@ -53,13 +54,14 @@ public class Model {
 
 	public void restart() {
 		if (!alive) {
-			lives = DEFAULTLIVES;
-			alive = true;
-			firstShot = false;
-			player = new Player();
-			ball = new Ball(player);
-			score = 0;
-			for (Block brick : bricks) {
+			this.lives = DEFAULTLIVES;
+			this.alive = true;
+			this.firstShot = false;
+			this.player = new Player();
+			this.ball = new Ball(player);
+			this.score = 0;
+			
+			for (Block brick : this.bricks) {
 				brick.resetLives();
 			}
 		}
@@ -69,17 +71,18 @@ public class Model {
 	}
 	
 	private void startNewLife() {
-		firstShot = false;
-		player = new Player();
-		ball = new Ball(player);
+		this.firstShot = false;
+		this.player = new Player();
+		this.ball = new Ball(player);
 	}
 
 	public void shoot() {
 		if (!firstShot) {
 			// xdir and ydir being set means the ball starts moving
-			ball.setxDir(2);
-			ball.setyDir(4);
-			firstShot = true;
+			this.ball.setxDir(2);
+			this.ball.setyDir(4);
+			this.firstShot = true;
+			
 			System.out.println("ball shot");
 		}
 	}
@@ -96,8 +99,10 @@ public class Model {
 			// moves the ball
 			ball.setX(ball.getX() + ball.getxDir());
 			ball.setY(ball.getY() + ball.getyDir());
-
-			player.setX(player.getX() + ball.getxDir());
+			
+			if(DEBUG)
+				player.setX(player.getX() + ball.getxDir());
+			
 			// intersect only works with
 			// rectangle objects
 			// checks if ball touches the paddle
@@ -166,9 +171,8 @@ public class Model {
 						}
 						// brick.printInfo();
 						brick.removeLife();
-						// System.out.println("life removed");
 						if(brick.isDead())
-							score = score + 10;
+							score = score + 10 * brick.getMaxLives();
 						// brick.printInfo();
 						break;
 					}
@@ -216,15 +220,15 @@ public class Model {
 	}
 
 	public boolean getAlive() {
-		return alive;
+		return this.alive;
 	}
 	
 	public int getScore() {
-		return score;
+		return this.score;
 	}
 	
 	public int getLives() {
-		return lives;
+		return this.lives;
 	}
 
 }

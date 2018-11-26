@@ -22,7 +22,7 @@ public class Player extends Rect {
 				Controller.FIELDLENGTH - DEFAULTPLAYERLENGTH - 40,
 				DEFAULTPLAYERWIDTH,
 				DEFAULTPLAYERLENGTH);
-		color = Color.cyan;
+		color = Color.black;
 	}
 
 	public int getMoveSpeed() {

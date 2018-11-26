@@ -20,9 +20,13 @@ import main.Controller;
 public class GameView extends JPanel implements KeyListener {
 	PriorityQueue<Command> commands = Controller.commands;
 	// objects = player and ball
-	ArrayList<Rect> objects = new ArrayList<Rect>();
-	ArrayList<Block> bricks = new ArrayList<>();
-	boolean alive = true;
+	private ArrayList<Rect> objects = new ArrayList<Rect>();
+	private ArrayList<Block> bricks = new ArrayList<>();
+	private boolean alive = true;
+	
+	// borderThickness
+	public static Color backgroundColor = new Color(200, 200, 200);
+	public static Color borderColor = new Color(66, 66, 66);
 
 	public GameView() {
 		addKeyListener(this);
@@ -36,10 +40,6 @@ public class GameView extends JPanel implements KeyListener {
 	public void setBricks(ArrayList<Block> bricks) {
 		this.bricks = bricks;
 	}
-
-	// borderThickness
-	Color backgroundColor = Color.gray;
-	Color borderColor = new Color(66, 66, 66);
 
 	public void paint(Graphics gr) {
 		Graphics2D g = (Graphics2D) gr;

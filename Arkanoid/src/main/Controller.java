@@ -13,19 +13,21 @@ import view.SideView;
 public class Controller implements ActionListener {
 	public static final int FIELDLENGTH = 500;
 	public static final int FIELDWIDTH = 510;
-	
 	public static final PriorityQueue<Command> commands = new PriorityQueue<>();
 	
-	Model model = new Model();
-	View view = new View();
-
-	int delay = 4;
-	Timer timer = new Timer(delay, this);
+	private static final int DELAY = 4;
 	
+	Model model;
+	View view;
+	Timer timer;
+
 	public Controller() {
-		timer.start();
+		model = new Model();
+		view = new View();
+		timer = new Timer(DELAY, this);
 		// default map
 		model.loadMap(new Map_CS151());
+		timer.start();
 	}
 
 	public void gameLoop() {
@@ -52,8 +54,14 @@ public class Controller implements ActionListener {
 			if (command.equals(Command.MAP_CS151)) {
 				model.loadMap(new Map_CS151());
 			}
-			if (command.equals(Command.MAP_DEFAULT)) {
+			if (command.equals(Command.MAP_FILLED)) {
 				model.loadMap(new Map_FILLED());
+			}
+			if (command.equals(Command.MAP_DIAMOND)) {
+				model.loadMap(new Map_DIAMOND());
+			}
+			if (command.equals(Command.MAP_RANDOM)) {
+				model.loadMap(new Map_Random());
 			}
 		}
 
