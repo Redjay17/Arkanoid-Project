@@ -3,18 +3,16 @@ package main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 import javax.swing.Timer;
 
-import entities.maps.Map_CS151;
-import entities.maps.Map_OWO;
+import entities.maps.*;
 import view.GameView;
 import view.SideView;
 
 public class Controller implements ActionListener {
 	public static final int FIELDLENGTH = 500;
-	public static final int FIELDWIDTH = 500;
+	public static final int FIELDWIDTH = 510;
 	
 	public static final PriorityQueue<Command> commands = new PriorityQueue<>();
 	
@@ -44,15 +42,18 @@ public class Controller implements ActionListener {
 			if (command.equals(Command.RIGHT)) {
 				model.moveRight();
 			}
+			if (command.equals(Command.ENTER)) {
+				model.restart();
+			}
+			
 			if (command.equals(Command.MAP_OWO)) {
 				model.loadMap(new Map_OWO());
 			}
 			if (command.equals(Command.MAP_CS151)) {
 				model.loadMap(new Map_CS151());
 			}
-
-			if (command.equals(Command.ENTER)) {
-				model.restart();
+			if (command.equals(Command.MAP_DEFAULT)) {
+				model.loadMap(new Map_FILLED());
 			}
 		}
 

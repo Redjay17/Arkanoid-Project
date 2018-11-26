@@ -46,15 +46,9 @@ public class Model {
 	public void loadMap(Map map) {
 		this.map = map;
 		// clear the arraylist so it doesn't stack with bricks
-		bricks = new ArrayList<Block>(map.getBricks());
-		alive = true;
-		firstShot = false;
-		player = new Player();
-		ball = new Ball(player);
-		score = 0;
-		for (Block brick : bricks) {
-			brick.resetLives();
-		}
+		this.bricks = new ArrayList<Block>(map.getBricks());
+		this.alive = false;
+		this.restart();
 	}
 
 	public void restart() {
@@ -83,23 +77,18 @@ public class Model {
 	public void shoot() {
 		if (!firstShot) {
 			// xdir and ydir being set means the ball starts moving
-			ball.setxDir(1);
-			ball.setyDir(2);
+			ball.setxDir(2);
+			ball.setyDir(4);
 			firstShot = true;
 			System.out.println("ball shot");
 		}
 	}
 
 	public void calculate() {
-		if (ball.getY() > MAXBALLDOWNY) {
-			lives--;
-			if(lives <= 0) {
+		if (ball.getY() > MAXBALLDOWNY + 50) {
+			if(--lives <= 0)
 				alive = false;
-				player = new Player();
-				ball = new Ball(player);
-			}
-			else
-				startNewLife();
+			startNewLife();
 		}
 
 		if (alive) {
@@ -108,11 +97,13 @@ public class Model {
 			ball.setX(ball.getX() + ball.getxDir());
 			ball.setY(ball.getY() + ball.getyDir());
 
+			player.setX(player.getX() + ball.getxDir());
 			// intersect only works with
 			// rectangle objects
 			// checks if ball touches the paddle
 			Rectangle ballHitBox = new Rectangle(ball.getX(), ball.getY(), ball.getWidth(), ball.getLength());
 			Rectangle playerHitBox = new Rectangle(player.getX(), player.getY(), player.getWidth(), player.getLength());
+			
 			if (ballHitBox.intersects(playerHitBox)) {
 				// first check if ball is inside player
 				if (ball.getX() + ball.getWidth() + 3 >= player.getX()
@@ -146,7 +137,10 @@ public class Model {
 				Block brick = bricks.get(i);
 
 				// check if ball hits brick
-				Rectangle brickHitBox = new Rectangle(brick.getX(), brick.getY(), brick.getWidth(), brick.getLength());
+				Rectangle brickHitBox = new Rectangle(
+						brick.getX(), brick.getY(), 
+						brick.getWidth(), brick.getLength());
+				
 				if (brickHitBox.intersects(ballHitBox)) {
 					if (brick.isDead()) {
 					} else {
@@ -173,7 +167,8 @@ public class Model {
 						// brick.printInfo();
 						brick.removeLife();
 						// System.out.println("life removed");
-						score = score + 10;
+						if(brick.isDead())
+							score = score + 10;
 						// brick.printInfo();
 						break;
 					}
@@ -182,15 +177,14 @@ public class Model {
 			}
 
 			// left corner
-			if (ball.getX() < MAXPLAYERLEFTX) {
+			if (ball.getX() < MAXPLAYERLEFTX)
 				ball.changexDir();
-			}
-			if (ball.getY() < BORDERSIZE) {
+			
+			if (ball.getY() < BORDERSIZE)
 				ball.changeyDir();
-			}
-			if (ball.getX() > MAXBALLRIGHTX) {
+			
+			if (ball.getX() > MAXBALLRIGHTX)
 				ball.changexDir();
-			}
 		}
 	}
 

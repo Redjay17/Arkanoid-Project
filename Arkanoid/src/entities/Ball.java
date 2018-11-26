@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.Color;
+
 /**
  * The ball. Turns out the physics of the ball is just in swapping xDir / yDir
  * to make it change directions and stuff
@@ -8,14 +10,20 @@ package entities;
  *
  */
 public class Ball extends Rect {
-
-	public int xDir = 0;
-	public int yDir = 0;
-	public int initBallSize = 10;
-	int ballSize = 10;
+	final static int DEFAULTSIZE = 10;
+	
+	int xDir;
+	int yDir;
+	int size;
+	
+	private Color color;
 
 	public Ball(int x, int y, int width, int length) {
 		super(x, y, width, length);
+		size = DEFAULTSIZE;
+		xDir = 0;
+		yDir = 0;
+		color = Color.orange;
 	}
 
 	/**
@@ -24,10 +32,11 @@ public class Ball extends Rect {
 	 * @param player
 	 */
 	public Ball(Player player) {
-		x = player.getX() + player.getWidth() / 2 - initBallSize / 2;
-		y = player.getY() - initBallSize - 2;
-		width = initBallSize;
-		length = initBallSize;
+		this(player.getX() + player.getWidth() / 2 - DEFAULTSIZE / 2,
+				player.getY() - DEFAULTSIZE - 2,
+				DEFAULTSIZE,
+				DEFAULTSIZE
+				);
 	}
 
 	public int getxDir() {
@@ -53,12 +62,13 @@ public class Ball extends Rect {
 	public void changeyDir() {
 		yDir = -yDir;
 	}
+	
 	public int getSize() {
-		return ballSize;
+		return size;
 	}
-
-	public void printBallInfo() {
-		System.out.println("Ball: " + y + " " + width + " " + length);
+	
+	public Color getColor() {
+		return this.color;
 	}
 
 }

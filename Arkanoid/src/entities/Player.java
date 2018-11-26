@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.Color;
+
 import main.Controller;
 
 /**
@@ -8,16 +10,19 @@ import main.Controller;
  *
  */
 public class Player extends Rect {
-	public int initPlayerWidth = 80;
-	public int initPlayerLength = 10;
+	public static final int DEFAULTPLAYERWIDTH = 80;
+	public static final int DEFAULTPLAYERLENGTH = 10;
 
-	public int moveSpeed = 35;
+	private int moveSpeed = 35;
+	private Color color;
+	
 
 	public Player() {
-		x = Controller.FIELDWIDTH / 2 - initPlayerWidth / 2;
-		y = Controller.FIELDLENGTH - 95 + -initPlayerLength;
-		width = initPlayerWidth;
-		length = initPlayerLength;
+		super(Controller.FIELDWIDTH / 2 - DEFAULTPLAYERWIDTH / 2,
+				Controller.FIELDLENGTH - DEFAULTPLAYERLENGTH - 40,
+				DEFAULTPLAYERWIDTH,
+				DEFAULTPLAYERLENGTH);
+		color = Color.cyan;
 	}
 
 	public int getMoveSpeed() {
@@ -28,12 +33,12 @@ public class Player extends Rect {
 		this.moveSpeed = moveSpeed;
 	}
 
-	public void printPlayerInfo() {
-		System.out.println("Player: " + x + " " + y + " " + width + " " + length);
-	}
-
 	public void reset() {
 
+	}
+	
+	public Color getColor() {
+		return this.color;
 	}
 
 }

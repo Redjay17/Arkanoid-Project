@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,6 +26,7 @@ public class GameView extends JPanel implements KeyListener {
 
 	public GameView() {
 		addKeyListener(this);
+		this.setPreferredSize(new Dimension(Controller.FIELDWIDTH, Controller.FIELDLENGTH));
 	}
 
 	public void setObjects(ArrayList<Rect> objects) {
@@ -37,10 +39,6 @@ public class GameView extends JPanel implements KeyListener {
 
 	// borderThickness
 	Color backgroundColor = Color.gray;
-	Color playerColor = Color.cyan;
-	Color ballColor = Color.orange;
-	Color brickColor = new Color(109, 239, 161);
-	// new Color(148, 246, 233);
 	Color borderColor = new Color(66, 66, 66);
 
 	public void paint(Graphics gr) {
@@ -51,21 +49,16 @@ public class GameView extends JPanel implements KeyListener {
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, Controller.FIELDWIDTH, Controller.FIELDLENGTH);
 
-		// paints the player
-		g.setColor(playerColor);
-		for (Rect rect : objects) {
-			g.fillRect(rect.x, rect.y, rect.width, rect.length);
-		}
-
 		// paints bricks depending on lives
 		for (Block brick : bricks) {
-			if (brick.getLives() < 0) {
-				g.setColor(backgroundColor);
-				g.fillRect(brick.x, brick.y, brick.width, brick.length);
-			} else if (brick.getLives() >= 1) {
-				g.setColor(brickColor);
-				g.fillRect(brick.x, brick.y, brick.width, brick.length);
-			}
+			g.setColor(brick.getColor());
+			g.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getLength());
+		}
+				
+		// paints the player
+		for (Rect rect : objects) {
+			g.setColor(rect.getColor());
+			g.fillRect(rect.getX(), rect.getY(), rect.getWidth(), rect.getLength());
 		}
 		
 		if(!alive) {

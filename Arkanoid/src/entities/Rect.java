@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.Color;
+
 /**
  * Ball, Player, and bricks are all things that can be built using fillRect, so
  * I'm using these to keep track of measurement data. All extends Rect.
@@ -8,20 +10,18 @@ package entities;
  *
  */
 public class Rect {
-	public int x = 0;
-	public int y = 0;
-	public int width = 0;
-	public int length = 0;
+	public final static Color DEAULTCOLOR = Color.black;
+	
+	private int x;
+	private int y;
+	private int width;
+	private int length;
 
 	public Rect(int x, int y, int width, int length) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.length = length;
-	}
-
-	public Rect() {
-		// how to fix Player constructor: Step 1.
 	}
 
 	public int getX() {
@@ -54,6 +54,17 @@ public class Rect {
 
 	public void setLength(int length) {
 		this.length = length;
+	}
+	
+	public Color getColor() {
+		return this.DEAULTCOLOR;
+	}
+	
+	public String toString() {
+			return "Rect: " + x + " " 
+					+ y + " " 
+					+ width + " " 
+					+ length;
 	}
 
 }
