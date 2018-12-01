@@ -16,45 +16,41 @@ import entities.Map;
  * @author Leo_Le
  *
  */
-public class MapButton extends JButton implements MouseListener {
+public class MapButton extends JButton {
 	PriorityQueue<Command> commands = Controller.commands;
 	Command command;
 
 	public MapButton(String title, Command command) {
-	this.command = command;
-	setText(title);
-	addMouseListener(this);
-	setFocusable(false);
+		this.command = command;
+		this.setText(title);
+		this.setFocusable(false);
+		this.addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent e) {
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				commands.add(command);
+
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
-
-	public void setMap(Map map) {
-	}
-
-	public void mouseClicked(MouseEvent e) {
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		commands.add(command);
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
