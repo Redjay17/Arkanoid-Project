@@ -6,9 +6,9 @@ import java.util.PriorityQueue;
 
 import javax.swing.JButton;
 
+import controller.Command;
+import controller.Controller;
 import entities.Map;
-import main.Command;
-import main.Controller;
 
 /**
  * A way for a user to click a button and load a map into the screen.

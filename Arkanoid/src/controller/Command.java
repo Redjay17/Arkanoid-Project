@@ -1,6 +1,6 @@
-package main;
+package controller;
 
 public enum Command {
-	ENTER, SPACE, LEFT, RIGHT, 
+	ENTER, EXIT, SPACE, LEFTSTART, RIGHTSTART, MOVEEND,
 	MAP_OWO, MAP_CS151, MAP_FILLED, MAP_DIAMOND, MAP_RANDOM
 }

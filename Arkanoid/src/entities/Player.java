@@ -2,7 +2,7 @@ package entities;
 
 import java.awt.Color;
 
-import main.Controller;
+import controller.Controller;
 
 /**
  * Player is the paddle.
@@ -12,8 +12,9 @@ import main.Controller;
 public class Player extends Rect {
 	public static final int DEFAULTPLAYERWIDTH = 80;
 	public static final int DEFAULTPLAYERLENGTH = 10;
+	public static final int DEFAULTPLAYERMOVESPEED = 5;
 
-	private int moveSpeed = 35;
+	private int moveSpeed;
 	private Color color;
 	
 
@@ -22,7 +23,8 @@ public class Player extends Rect {
 				Controller.FIELDLENGTH - DEFAULTPLAYERLENGTH - 40,
 				DEFAULTPLAYERWIDTH,
 				DEFAULTPLAYERLENGTH);
-		color = Color.black;
+		this.color = Color.black;
+		this.moveSpeed = 0;
 	}
 
 	public int getMoveSpeed() {

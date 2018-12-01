@@ -2,7 +2,7 @@ package entities;
 
 import java.awt.Color;
 
-import view.GameView;
+import view.GamePanel;
 
 /**
  * Rectangles are displayed or not displayed depending on that rectangle's
@@ -58,11 +58,12 @@ public class Block extends Rect {
 
 	public void setLives(int lives) {
 		this.lives = lives;
+		this.changeColor();
 	}
 	
 	private void changeColor() {
 		if(this.isDead())
-			color = GameView.backgroundColor;
+			color = GamePanel.backgroundColor;
 		else
 			switch(this.lives) {
 			case 1:

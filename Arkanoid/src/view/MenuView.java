@@ -7,7 +7,7 @@ import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import main.Command;
+import controller.Command;
 /*
  * Menu contains buttons for some of the game's options as well as a console
  * output.
@@ -15,7 +15,7 @@ import main.Command;
  */
 public class MenuView extends JPanel {	
 	public static final int MENUWIDTH = 650;
-	public static final int MENULENGTH = 75;
+	public static final int MENULENGTH = 100;
 	
 	public MenuView() {
 		this.setLayout(new FlowLayout());

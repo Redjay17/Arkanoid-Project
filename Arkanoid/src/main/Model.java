@@ -3,6 +3,7 @@ package main;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import controller.Controller;
 import entities.Ball;
 import entities.Block;
 import entities.Map;
@@ -17,7 +18,7 @@ public class Model {
 	private Ball ball = new Ball(player);
 	
 	private boolean alive = true;
-	private boolean firstShot = false;
+	private boolean hasShot = false;
 	private int score = 0;
 	private int lives = DEFAULTLIVES;
 	
@@ -56,7 +57,7 @@ public class Model {
 		if (!alive) {
 			this.lives = DEFAULTLIVES;
 			this.alive = true;
-			this.firstShot = false;
+			this.hasShot = false;
 			this.player = new Player();
 			this.ball = new Ball(player);
 			this.score = 0;
@@ -64,6 +65,7 @@ public class Model {
 			for (Block brick : this.bricks) {
 				brick.resetLives();
 			}
+			
 		}
 		else {
 			System.out.println("alive");
@@ -71,17 +73,17 @@ public class Model {
 	}
 	
 	private void startNewLife() {
-		this.firstShot = false;
+		this.hasShot = false;
 		this.player = new Player();
 		this.ball = new Ball(player);
 	}
 
 	public void shoot() {
-		if (!firstShot) {
+		if (!hasShot) {
 			// xdir and ydir being set means the ball starts moving
-			this.ball.setxDir(2);
-			this.ball.setyDir(4);
-			this.firstShot = true;
+			this.ball.setxDir(-1);
+			this.ball.setyDir(-2);
+			this.hasShot = true;
 			
 			System.out.println("ball shot");
 		}
@@ -95,13 +97,15 @@ public class Model {
 		}
 
 		if (alive) {
-
+			//Move the player
+			this.movePlayer();
 			// moves the ball
 			ball.setX(ball.getX() + ball.getxDir());
 			ball.setY(ball.getY() + ball.getyDir());
 			
 			if(DEBUG)
-				player.setX(player.getX() + ball.getxDir());
+				if(hasShot)
+					player.setX(ball.getX() - (int)(player.getWidth()/2));
 			
 			// intersect only works with
 			// rectangle objects
@@ -192,31 +196,26 @@ public class Model {
 		}
 	}
 
-	public void moveRight() {
-		// don't let player leave map
-		if (player.getX() >= MAXPLAYERRIGHTX) {
-			player.setX(MAXPLAYERRIGHTX);
-		} else {
-			// move as normal
-			player.setX(player.getX() + player.getMoveSpeed());
-			if (!firstShot) {
-				ball.setX(ball.getX() + player.getMoveSpeed());
-			}
-		}
+	public void startMovement(int direction) {
+		player.setMoveSpeed(Player.DEFAULTPLAYERMOVESPEED * direction);
+		
 	}
 
-	public void moveLeft() {
-		// don't let player leave map
-		if (player.getX() <= MAXPLAYERLEFTX) {
+	public void endMovement() {
+		player.setMoveSpeed(0);
+	}
+	
+	private void movePlayer() {
+		player.setX(player.getX() + player.getMoveSpeed());
+		
+		if (player.getX() >= MAXPLAYERRIGHTX)
+			player.setX(MAXPLAYERRIGHTX);
+		
+		if (player.getX() <= MAXPLAYERLEFTX)
 			player.setX(MAXPLAYERLEFTX);
-		} else {
-			// move as normal
-			player.setX(player.getX() - player.getMoveSpeed());
-			if (!firstShot) {
-				ball.setX(ball.getX() - player.getMoveSpeed());
-			}
-
-		}
+		
+		if (!hasShot)
+			ball.setX(player.getX() + (int)(player.getWidth()/2.5));
 	}
 
 	public boolean getAlive() {

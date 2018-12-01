@@ -12,12 +12,12 @@ import java.util.PriorityQueue;
 
 import javax.swing.JPanel;
 
+import controller.Command;
+import controller.Controller;
 import entities.Block;
 import entities.Rect;
-import main.Command;
-import main.Controller;
 
-public class GameView extends JPanel implements KeyListener {
+public class GamePanel extends JPanel {
 	PriorityQueue<Command> commands = Controller.commands;
 	// objects = player and ball
 	private ArrayList<Rect> objects = new ArrayList<Rect>();
@@ -28,9 +28,49 @@ public class GameView extends JPanel implements KeyListener {
 	public static Color backgroundColor = new Color(200, 200, 200);
 	public static Color borderColor = new Color(66, 66, 66);
 
-	public GameView() {
-		addKeyListener(this);
+	public GamePanel() {
 		this.setPreferredSize(new Dimension(Controller.FIELDWIDTH, Controller.FIELDLENGTH));
+		this.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(!commands.contains(Command.RIGHTSTART) && !commands.contains(Command.LEFTSTART)) {
+					if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+						commands.add(Command.RIGHTSTART);
+					}
+					if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+						commands.add(Command.LEFTSTART);
+					}
+				}
+				
+				// Space "shoots" the ball from the paddle on first shot
+				if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+					commands.add(Command.SPACE);
+				}
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					commands.add(Command.ENTER);
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					commands.add(Command.MOVEEND);
+				}
+				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					commands.add(Command.MOVEEND);
+				}
+			}
+			
+		});
+	}
+	
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 	public void setObjects(ArrayList<Rect> objects) {
@@ -73,52 +113,5 @@ public class GameView extends JPanel implements KeyListener {
 			g.drawString("press Enter to restart", 110, 250);
 		}
 
-	}
-	
-	public void setAlive(boolean alive) {
-		this.alive = alive;
-	}
-
-	public void paintBricks(Graphics2D g) {
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			commands.add(Command.RIGHT);
-		}
-
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			commands.add(Command.LEFT);
-		}
-
-		// Space "shoots" the ball from the paddle on first shot
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-			commands.add(Command.SPACE);
-		}
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			commands.add(Command.ENTER);
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		{
-			if (e.getKeyCode() == KeyEvent.VK_Q) {
-				commands.add(Command.MAP_OWO);
-			}
-
-			if (e.getKeyCode() == KeyEvent.VK_W) {
-				commands.add(Command.MAP_CS151);
-			}
-
-		}
 	}
 }

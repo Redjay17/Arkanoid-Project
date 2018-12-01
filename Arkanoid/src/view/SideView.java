@@ -17,12 +17,12 @@ public class SideView extends JPanel {
 	private int score = 0;
 	private int lives = 3;
 	
-	final private int VIEWLENGTH = 400;
-	final private int VIEWWIDTH = 150;
+	public static final int SIDEVIEWLENGTH = 500;
+	public static final int SIDEVIEWWIDTH = 150;
 
 	public SideView() {
 		setLayout(new FlowLayout());
-		setPreferredSize(new Dimension(VIEWWIDTH, VIEWLENGTH));
+		setPreferredSize(new Dimension(SIDEVIEWWIDTH, SIDEVIEWLENGTH));
 		setBorder(BorderFactory.createBevelBorder(0));
 	}
 

@@ -1,4 +1,4 @@
-package main;
+package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,11 +9,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.Command;
+import controller.Controller;
 import entities.Map;
-import view.GameView;
-import view.MapButton;
-import view.MenuView;
-import view.SideView;
 
 /**
  * View of the game
@@ -26,20 +24,17 @@ public class View extends JFrame {
 
 	// MAKE 100% ABSOLUTELY SURE THAT FIELDPANELENGTH AND FIELDPANEWITH ARE
 	// USED TO CONSTRUCT THE JPANEL WHERE THE GAME IS PLAYED
-	public static final int FIELDLENGTH = 500;
-	public static final int FIELDWIDTH = 500;
+	public static final int VIEWLENGTH = 600;
+	public static final int VIEWWIDTH = 650;
 
 	PriorityQueue<Command> commands = Controller.commands;
 
 	MenuView menuPanel;
 	SideView sidePanel;
-	GameView gameplay;
+	GamePanel gameplay;
 
 	public View() {
-		this.setTitle("Arkanoid");
-		this.setLayout(new BorderLayout());
-		
-		gameplay = new GameView();
+		gameplay = new GamePanel();
 		sidePanel = new SideView();
 		menuPanel = new MenuView();
 		
@@ -49,12 +44,17 @@ public class View extends JFrame {
 	}
 
 	public void start() {
+		this.setTitle("Arkanoid");
+		this.setLayout(new BorderLayout());
+		this.setPreferredSize(new Dimension(VIEWWIDTH, VIEWLENGTH));
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setResizable(false);
+		
 		this.add(gameplay, BorderLayout.CENTER);
 		this.add(menuPanel, BorderLayout.SOUTH);
 		this.add(sidePanel, BorderLayout.EAST);
+		
 		this.pack();
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setResizable(false);
 		this.setVisible(true);
 	}
 
@@ -63,7 +63,7 @@ public class View extends JFrame {
 		this.add(gameplay, BorderLayout.CENTER);
 	}
 
-	public GameView getGameView() {
+	public GamePanel getGameView() {
 		return gameplay;
 	}
 	
