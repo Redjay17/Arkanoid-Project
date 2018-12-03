@@ -1,13 +1,9 @@
-package entities.maps;
+package model.maps;
 
 import java.util.ArrayList;
 
-/**
- * @author Leo_Le
- */
-
-import entities.Block;
-import entities.Map;
+import model.Block;
+import model.Map;
 
 public class Map_FILLED extends Map {
 	public Map_FILLED() {

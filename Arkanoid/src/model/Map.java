@@ -1,8 +1,8 @@
-package entities;
-
-import entities.Block;
+package model;
 
 import java.util.ArrayList;
+
+import model.Block;
 
 /**
  * Things that load maps need to take in obects of type map. Which is why all

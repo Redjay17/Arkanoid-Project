@@ -1,14 +1,10 @@
-package entities.maps;
+package model.maps;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * @author Leo_Le
- */
-
-import entities.Block;
-import entities.Map;
+import model.Block;
+import model.Map;
 
 public class Map_Random extends Map {
 	

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import controller.Command;
 import controller.Controller;
-import entities.Map;
+import model.Map;
 
 /**
  * View of the game

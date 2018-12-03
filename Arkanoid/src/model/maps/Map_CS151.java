@@ -1,4 +1,4 @@
-package entities.maps;
+package model.maps;
 
 /**
  * A map that draws a 
@@ -7,8 +7,8 @@ package entities.maps;
 
 import java.util.ArrayList;
 
-import entities.Block;
-import entities.Map;
+import model.Block;
+import model.Map;
 
 public class Map_CS151 extends Map {
 	public Map_CS151() {

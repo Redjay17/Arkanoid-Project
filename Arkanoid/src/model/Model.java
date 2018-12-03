@@ -1,14 +1,9 @@
-package main;
+package model;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import controller.Controller;
-import entities.Ball;
-import entities.Block;
-import entities.Map;
-import entities.Player;
-import entities.Rect;
 
 public class Model {
 	private final boolean DEBUG = true;

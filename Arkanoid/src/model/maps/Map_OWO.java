@@ -1,4 +1,4 @@
-package entities.maps;
+package model.maps;
 
 
 /**
@@ -6,8 +6,8 @@ package entities.maps;
  */
 import java.util.ArrayList;
 
-import entities.Block;
-import entities.Map;
+import model.Block;
+import model.Map;
 
 public class Map_OWO extends Map {
 	public Map_OWO() {

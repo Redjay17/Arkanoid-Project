@@ -6,8 +6,8 @@ import java.util.PriorityQueue;
 
 import javax.swing.Timer;
 
-import entities.maps.*;
-import main.Model;
+import model.Model;
+import model.maps.*;
 import view.GamePanel;
 import view.SideView;
 import view.View;

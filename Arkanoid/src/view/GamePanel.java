@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 
 import controller.Command;
 import controller.Controller;
-import entities.Block;
-import entities.Rect;
+import model.Block;
+import model.Rect;
 
 public class GamePanel extends JPanel {
 	PriorityQueue<Command> commands = Controller.commands;
