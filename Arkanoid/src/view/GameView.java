@@ -17,7 +17,7 @@ import entities.Rect;
 import main.Command;
 import main.Controller;
 
-public class GameView extends JPanel implements KeyListener {
+public class GamePanel extends JPanel implements KeyListener {
 	PriorityQueue<Command> commands = Controller.commands;
 	// objects = player and ball
 	private ArrayList<Rect> objects = new ArrayList<Rect>();
@@ -28,7 +28,7 @@ public class GameView extends JPanel implements KeyListener {
 	public static Color backgroundColor = new Color(200, 200, 200);
 	public static Color borderColor = new Color(66, 66, 66);
 
-	public GameView() {
+	public GamePanel() {
 		addKeyListener(this);
 		this.setPreferredSize(new Dimension(Controller.FIELDWIDTH, Controller.FIELDLENGTH));
 	}
