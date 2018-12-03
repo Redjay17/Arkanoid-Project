@@ -13,14 +13,14 @@ import javax.swing.JPanel;
 /*
  * Side panel contains stats for the game
  */
-public class SideView extends JPanel {
+public class SidePanel extends JPanel {
 	private int score = 0;
 	private int lives = 3;
 	
 	final private int VIEWLENGTH = 400;
 	final private int VIEWWIDTH = 150;
 
-	public SideView() {
+	public SidePanel() {
 		setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(VIEWWIDTH, VIEWLENGTH));
 		setBorder(BorderFactory.createBevelBorder(0));
