@@ -13,11 +13,11 @@ import main.Command;
  * output.
  * 
  */
-public class MenuView extends JPanel {	
+public class MenuPanel extends JPanel {	
 	public static final int MENUWIDTH = 650;
 	public static final int MENULENGTH = 75;
 	
-	public MenuView() {
+	public MenuPanel() {
 		this.setLayout(new FlowLayout());
 		this.setBorder(BorderFactory.createLoweredBevelBorder());
 		this.setBackground(Color.white); // Temporary.
