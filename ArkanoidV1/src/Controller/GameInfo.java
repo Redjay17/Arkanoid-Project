@@ -19,13 +19,13 @@ public class GameInfo
 {
 	public Model model = new Model();
 	
-	ArrayList<Brick> Bricks = null;
-	boolean IsAlive = false;
-	ArrayList<Rect> Objects = null;
-	boolean win = false;
-	Player Player = null;
-	Ball Ball = null;
-	int Score = -1;
+	static ArrayList<Brick> Bricks = null;
+	static boolean IsAlive = false;
+	static ArrayList<Rect> Objects = null;
+	static boolean Win = false;
+	static Player Player = null;
+	static Ball Ball = null;
+	static int Score = -1;
 
 
 
@@ -39,99 +39,99 @@ public class GameInfo
 	 * @param Bricks
 	 * @param IsAlive
 	 * @param Objects
-	 * @param win
+	 * @param Win
 	 */
 	public GameInfo()
 	{
-		this.Bricks = model.getBricks();
-		this.Objects = model.getObjects();
-		this.IsAlive = model.getAlive();
-		this.win = model.getWon();
-		this.Player = model.getPlayer();
-		this.Ball  = model.getBall();
-		this.Score = model.getScore();
+		Bricks = model.getBricks();
+		Objects = model.getObjects();
+		IsAlive = model.getAlive();
+		Win = model.getWon();
+		Player = model.getPlayer();
+		Ball  = model.getBall();
+		Score = model.getScore();
 	}
 	
-	public void Update()
+	public static void Update(ArrayList<Brick> bricks, boolean isAlive, ArrayList<Rect> objects,
+			boolean win, Player player, Ball ball, int score)
 	{
-		this.Bricks = model.getBricks();
-		this.Objects = model.getObjects();
-		this.IsAlive = model.getAlive();
-		this.win = model.getWon();
-		this.Player = model.getPlayer();
-		this.Ball  = model.getBall();
-		this.Score = model.getScore();
-		
+		Bricks = bricks;
+		IsAlive = isAlive;
+		Objects = objects;
+		Win = win;
+		Player = player;
+		Ball = ball;
+		Score = score;
 	}
 	
 	public ArrayList<Brick> getBricks()
 	{
-		return this.Bricks;
+		return Bricks;
 	}
 	
 	public boolean getAlive()
 	{
-		return this.IsAlive;
+		return IsAlive;
 	}
 	
 	public ArrayList<Rect> getObjects()
 	{
-		return this.Objects;
+		return Objects;
 	}
 	
 	public boolean getWon()
 	{
-		return this.win;
+		return Win;
 	}
 	
 	public Player getPlayer()
 	{
-		return this.Player;
+		return Player;
 	}
 	
 	public Ball getBall()
 	{
-		return this.Ball;
+		return Ball;
 	}
 	
 	public int getScore()
 	{
-		return this.Score;
+		return Score;
 	}
 	
 	public void setBricks()
 	{
-		this.Bricks = model.getBricks();
+		Bricks = model.getBricks();
 	}
 	
 	public void setAlive()
 	{
-		this.Objects = model.getObjects();
+		Objects = model.getObjects();
 	}
 	
 	public void setObjects()
 	{
-		this.IsAlive = model.getAlive();
+		IsAlive = model.getAlive();
 	}
 	
 	public void setWon()
 	{
-		this.win = model.getWon();
+		Win = model.getWon();
 	}
 	
 	public void setPlayer()
 	{
-		this.Player = model.getPlayer();
+		Player = model.getPlayer();
 	}
 	
 	public void setBall()
 	{
-		this.Ball  = model.getBall();
+		Ball  = model.getBall();
 	}
 	
 	public void setScore()
 	{
-		this.Score = model.getScore();
+		Score = model.getScore();
 	}
 	
 	

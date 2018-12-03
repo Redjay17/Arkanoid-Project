@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import Controller.Controller;
+import Controller.GameInfo;
 
 /**
  * Handles the calculation of the physics in calculate()
@@ -172,6 +173,7 @@ public class Model {
 				ball.changexDir();
 			}
 		}
+		//GameInfo.Update(bricks, alive, getObjects(), won, player, ball, score);
 	}
 
 	// if all the balls are broken, set won to true
