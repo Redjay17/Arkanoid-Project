@@ -1,4 +1,4 @@
-package a4_MVC;
+package MapGenerator3_UI_Friendlier;
 
 /**
  * Rectangles are displayed or not displayed depending on that rectangle's
@@ -9,22 +9,26 @@ package a4_MVC;
  *
  */
 public class Brick extends Rect {
-	public int defaultBrickLives = 1;
 	int lives = 1;
 
 	public Brick(int x, int y, int width, int length) {
 		super(x, y, width, length);
 	}
 
-	public void resetLives() {
-		lives = defaultBrickLives;
-	}
 	public int getLives() {
 		return lives;
 	}
 
 	public void removeLife() {
 		lives--;
+	}
+
+	public void giveLife() {
+		lives++;
+	}
+
+	public void giveLives(int lives) {
+		this.lives = lives;
 	}
 
 	public boolean isDead() {

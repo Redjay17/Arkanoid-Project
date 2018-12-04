@@ -1,0 +1,12 @@
+Main method is in Screen class.
+Click a box to draw that map square.
+
+Do not click the same box twice.
+Clicking the same box twice will add the same brick to the Queue twice.
+
+Press enter to print all the blocks
+
+left, up, down, right to shift all the blocks
+
+z to remove last block
+
