@@ -1,6 +1,9 @@
 package controller;
 
+import model.Map;
+
 public enum Command {
-	ENTER, EXIT, SPACE, LEFTSTART, RIGHTSTART, MOVEEND,
-	MAP_OWO, MAP_CS151, MAP_FILLED, MAP_DIAMOND, MAP_RANDOM
+	ENTER, EXIT, SPACE, LEFTSTART, RIGHTSTART, MOVEEND, LOADMAP;
+	
+	public static Map currMap;
 }

@@ -8,6 +8,7 @@ import javax.swing.JButton;
 
 import controller.Command;
 import controller.Controller;
+import model.Map;
 
 /**
  * A way for a user to click a button and load a map into the screen.
@@ -18,18 +19,22 @@ import controller.Controller;
 public class MapButton extends JButton {
 	PriorityQueue<Command> commands = Controller.commands;
 	Command command;
+	Map map;
 
-	public MapButton(String title, Command command) {
-		this.command = command;
+	public MapButton(String title, Map map) {
+		this.command = Command.LOADMAP;
 		this.setText(title);
 		this.setFocusable(false);
+		this.map = map;
 		this.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {
+				
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
 				commands.add(command);
+				Command.currMap = map;
 
 			}
 

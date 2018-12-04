@@ -10,17 +10,16 @@ import java.awt.Graphics2D;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import controller.GameInfo;
+
 /*
  * Side panel contains stats for the game
  */
-public class SideView extends JPanel {
-	private int score = 0;
-	private int lives = 3;
-	
+public class SidePanel extends JPanel {	
 	public static final int SIDEVIEWLENGTH = 500;
 	public static final int SIDEVIEWWIDTH = 150;
 
-	public SideView() {
+	public SidePanel() {
 		setLayout(new FlowLayout());
 		setPreferredSize(new Dimension(SIDEVIEWWIDTH, SIDEVIEWLENGTH));
 		setBorder(BorderFactory.createBevelBorder(0));
@@ -43,6 +42,8 @@ public class SideView extends JPanel {
 		g.drawString("Score", 30, 50);
 		g.setFont(new Font("serif", Font.BOLD, 35));
 		
+		int score = GameInfo.getScore();
+		
 		if((score / 10) == 0)
 			g.drawString(Integer.toString(score), 60, 100);
 		else if((score / 100) == 0)
@@ -58,6 +59,8 @@ public class SideView extends JPanel {
 		g.drawString("Lives", 30, 190);
 		g.setFont(new Font("serif", Font.BOLD, 35));
 		
+		int lives = GameInfo.getLives();
+		
 		if((lives / 10) == 0)
 			g.drawString(Integer.toString(lives), 60, 240);
 		else if((lives / 100) == 0)
@@ -66,13 +69,5 @@ public class SideView extends JPanel {
 			g.drawString(Integer.toString(lives), 40, 240);
 		else
 			g.drawString(Integer.toString(lives), 30, 240);
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-	
-	public void setLives(int lives) {
-		this.lives = lives;
 	}
 }

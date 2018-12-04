@@ -6,99 +6,85 @@ import java.util.PriorityQueue;
 
 import javax.swing.Timer;
 
+import model.Map;
 import model.Model;
 import model.maps.*;
 import view.GamePanel;
-import view.SideView;
+import view.SidePanel;
 import view.View;
 
-public class Controller implements ActionListener {
+/*
+ * The controller takes all inputs, calculates it in model, and outputs it to the view
+ * 
+ * TODO: Implement valves. Maybe add strategy
+ * 
+ * 
+ */
+public class Controller{
+	public static final PriorityQueue<Command> commands = new PriorityQueue<>();
+	
 	public static final int FIELDLENGTH = 500;
 	public static final int FIELDWIDTH = 500;
-	public static final PriorityQueue<Command> commands = new PriorityQueue<>();
+	public static final Map DEFAULTMAP = new Map_CS151();
 	
 	private static final int DELAY = 1;
 	private Command currentCommand;
 	
 	Model model;
 	View view;
-	Timer timer;
+	Timer t;
 
 	public Controller() {
-		model = new Model();
+		model = new Model(DEFAULTMAP);
 		view = new View();
-		timer = new Timer(DELAY, this);
-		// default map
+		
 		model.loadMap(new Map_CS151());
-		timer.start();
-		//gameLoop();
+		
+		t = new Timer(DELAY, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				gameLoop();
+			}
+			
+		});
+		
+		t.start();
 	}
 
 	public void gameLoop() {
 		//while(currentCommand != Command.EXIT) {
-			model.calculate();
-			if (commands.size() > 0) {
-				currentCommand = commands.remove();
-				switch(currentCommand) {
-				case SPACE:
-					model.shoot();
-					break;
-				case LEFTSTART:
-					model.startMovement(-1);
-					break;
-				case RIGHTSTART:
-					model.startMovement(1);
-					break;
-				case MOVEEND:
-					model.endMovement();
-					break;
-				case ENTER:
-					model.restart();
-					break;
-				//MAPS
-				case MAP_OWO:
-					model.loadMap(new Map_OWO());
-					break;
-				case MAP_CS151:
-					model.loadMap(new Map_CS151());
-					break;
-				case MAP_FILLED:
-					model.loadMap(new Map_FILLED());
-					break;
-				case MAP_DIAMOND:
-					model.loadMap(new Map_DIAMOND());
-					break;
-				case MAP_RANDOM:
-					model.loadMap(new Map_Random());
-					break;
-				default:
-					break;
-				}
+		model.calculate();
+		if (!commands.isEmpty()) {
+			currentCommand = commands.remove();
+			switch(currentCommand) {
+			case SPACE:
+				model.shoot();
+				break;
+			case LEFTSTART:
+				model.startMovement(-1);
+				break;
+			case RIGHTSTART:
+				model.startMovement(1);
+				break;
+			case MOVEEND:
+				model.endMovement();
+				break;
+			case ENTER:
+				model.restart();
+				break;
+			//MAPS
+			case LOADMAP:
+				model.loadMap(Command.currMap);
+			default:
+				break;
 			}
-
-			GamePanel gp = view.getGameView();
-			SideView sv = view.getSideView();
-
-			// repaints view based off of the new info in model
-			gp.setObjects(model.getObjects());
-			gp.setBricks((model.getBricks()));
-			gp.setAlive(model.getAlive());
-			gp.repaint();
-
-			sv.setLives(model.getLives());
-			sv.setScore(model.getScore());
-			sv.repaint();
-			//}
-	}
-
-	public void actionPerformed(ActionEvent e) {
-		// yes. I wanted to follow naming conventions.
-		gameLoop();
-
+		}
+			
+			view.updatePanels();
+		//}
 	}
 
 	public void start() {
 		view.start();
-
 	}
 }

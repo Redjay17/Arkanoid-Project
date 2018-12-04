@@ -29,14 +29,14 @@ public class View extends JFrame {
 
 	PriorityQueue<Command> commands = Controller.commands;
 
-	MenuView menuPanel;
-	SideView sidePanel;
+	MenuPanel menuPanel;
+	SidePanel sidePanel;
 	GamePanel gameplay;
 
 	public View() {
 		gameplay = new GamePanel();
-		sidePanel = new SideView();
-		menuPanel = new MenuView();
+		sidePanel = new SidePanel();
+		menuPanel = new MenuPanel();
 		
 		gameplay.setFocusable(true);
 		sidePanel.setFocusable(false);
@@ -59,15 +59,20 @@ public class View extends JFrame {
 	}
 
 	public void loadMap(Map map) {
-		remove(gameplay);
+		this.remove(gameplay);
 		this.add(gameplay, BorderLayout.CENTER);
+	}
+	
+	public void updatePanels() {
+		this.sidePanel.repaint();
+		this.gameplay.repaint();
 	}
 
 	public GamePanel getGameView() {
 		return gameplay;
 	}
 	
-	public SideView getSideView() {
+	public SidePanel getSideView() {
 		return sidePanel;
 	}
 }

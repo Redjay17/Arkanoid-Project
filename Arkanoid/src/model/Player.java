@@ -12,9 +12,10 @@ import controller.Controller;
 public class Player extends Rect {
 	public static final int DEFAULTPLAYERWIDTH = 80;
 	public static final int DEFAULTPLAYERLENGTH = 10;
-	public static final int DEFAULTPLAYERMOVESPEED = 5;
+	public static final int DEFAULTPLAYERMOVESPEED = 3;
 
 	private int moveSpeed;
+	private int currDirection;
 	private Color color;
 	
 
@@ -25,6 +26,7 @@ public class Player extends Rect {
 				DEFAULTPLAYERLENGTH);
 		this.color = Color.black;
 		this.moveSpeed = 0;
+		this.currDirection = 1;
 	}
 
 	public int getMoveSpeed() {
@@ -33,10 +35,14 @@ public class Player extends Rect {
 
 	public void setMoveSpeed(int moveSpeed) {
 		this.moveSpeed = moveSpeed;
+		if(this.moveSpeed > 0)
+			this.currDirection = 1;
+		if(this.moveSpeed < 0)
+			this.currDirection = -1;
 	}
 
-	public void reset() {
-
+	public int getCurrDirection() {
+		return this.currDirection;
 	}
 	
 	public Color getColor() {

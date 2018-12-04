@@ -15,6 +15,7 @@ import view.GamePanel;
 public class Block extends Rect {
 	public static final int DEAULTLIVES = 1;
 	public static final int DEAULTSIZE = 15;
+	public static final int BASESCORE = 10;
 	
 	private int maxLives;
 	private int lives;

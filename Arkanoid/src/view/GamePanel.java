@@ -14,15 +14,12 @@ import javax.swing.JPanel;
 
 import controller.Command;
 import controller.Controller;
+import controller.GameInfo;
 import model.Block;
 import model.Rect;
 
 public class GamePanel extends JPanel {
 	PriorityQueue<Command> commands = Controller.commands;
-	// objects = player and ball
-	private ArrayList<Rect> objects = new ArrayList<Rect>();
-	private ArrayList<Block> bricks = new ArrayList<>();
-	private boolean alive = true;
 	
 	// borderThickness
 	public static Color backgroundColor = new Color(200, 200, 200);
@@ -31,6 +28,12 @@ public class GamePanel extends JPanel {
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(Controller.FIELDWIDTH, Controller.FIELDLENGTH));
 		this.addKeyListener(new KeyListener() {
+			
+			private boolean keyLeftActivated = false;
+			private boolean keyRightActivated = false;
+			
+			private int priority = 0;
+			
 			@Override
 			public void keyTyped(KeyEvent e) {
 				
@@ -38,12 +41,18 @@ public class GamePanel extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(!commands.contains(Command.RIGHTSTART) && !commands.contains(Command.LEFTSTART)) {
-					if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					if(!commands.contains(Command.RIGHTSTART)) {
 						commands.add(Command.RIGHTSTART);
+						keyRightActivated = true;
+						priority = 1;
 					}
-					if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+				}
+				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					if(!commands.contains(Command.LEFTSTART)) {
 						commands.add(Command.LEFTSTART);
+						keyLeftActivated = true;
+						priority = 0;
 					}
 				}
 				
@@ -54,31 +63,34 @@ public class GamePanel extends JPanel {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					commands.add(Command.ENTER);
 				}
+				for(Command c: commands)
+					System.out.println(c);
+				if(!commands.isEmpty())
+					System.out.println("--------");
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				if(keyRightActivated && keyLeftActivated)
+					if(priority == 1)
+						keyLeftActivated = false;
+					else
+						keyRightActivated = false;
+				
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT &&
+						!keyLeftActivated) {
+						keyRightActivated = false;
+						commands.add(Command.MOVEEND);
+				}
+				
+				if(e.getKeyCode() == KeyEvent.VK_LEFT &&
+					!keyRightActivated) {
+					keyLeftActivated = false;
 					commands.add(Command.MOVEEND);
 				}
-				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-					commands.add(Command.MOVEEND);
-				}
-			}
+			}	
 			
 		});
-	}
-	
-	public void setAlive(boolean alive) {
-		this.alive = alive;
-	}
-
-	public void setObjects(ArrayList<Rect> objects) {
-		this.objects = objects;
-	}
-
-	public void setBricks(ArrayList<Block> bricks) {
-		this.bricks = bricks;
 	}
 
 	public void paint(Graphics gr) {
@@ -90,28 +102,45 @@ public class GamePanel extends JPanel {
 		g.fillRect(0, 0, Controller.FIELDWIDTH, Controller.FIELDLENGTH);
 
 		// paints bricks depending on lives
-		for (Block brick : bricks) {
+		for (Block brick : GameInfo.getBricks()) {
 			g.setColor(brick.getColor());
 			g.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getLength());
 		}
 				
 		// paints the player
-		for (Rect rect : objects) {
+		for (Rect rect : GameInfo.getObjects()) {
 			g.setColor(rect.getColor());
 			g.fillRect(rect.getX(), rect.getY(), rect.getWidth(), rect.getLength());
 		}
 		
-		if(!alive) {
-			g.setColor(Color.black);
-			g.fillRect(0, 0, Controller.FIELDWIDTH, Controller.FIELDWIDTH);
-			g.setColor(Color.red);
-			
-			g.setFont(new Font("TimesRoman", Font.PLAIN, 80));
-			g.drawString("YOU DIED", 50, 200);
+		if(!GameInfo.getAlive())
+			paintDead(g);
+		
+		if(GameInfo.getWon())
+			paintWin(g);
+	}
+	
+	public void paintWin(Graphics2D g) {
+		g.setColor(backgroundColor);
+		g.fillRect(0, 0, Controller.FIELDWIDTH, Controller.FIELDLENGTH);
+		g.setColor(new Color(113, 255, 137));
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+		g.drawString("You Actually beat it.", 50, 150);
+		g.drawString("Nice.", 185, 210);
 
-			g.setFont(new Font("serif", Font.BOLD, 30));
-			g.drawString("press Enter to restart", 110, 250);
-		}
+		g.setFont(new Font("serif", Font.BOLD, 35));
+		g.drawString("press Enter to restart", 80, 300);
 
 	}
+
+	public void paintDead(Graphics2D g) {
+		g.setColor(Color.black);
+		g.fillRect(0, 0, Controller.FIELDWIDTH, Controller.FIELDLENGTH);
+		g.setColor(Color.red);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 80));
+		g.drawString("YOU DIED", 50, 200);
+
+		g.setFont(new Font("serif", Font.BOLD, 30));
+		g.drawString("press Enter to restart", 110, 250);
+}
 }

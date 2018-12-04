@@ -10,7 +10,9 @@ import java.awt.Color;
  *
  */
 public class Ball extends Rect {
-	final static int DEFAULTSIZE = 10;
+	public final static int DEFAULTSIZE = 10;
+	public static final int DEFAULTXDIR = 1;
+	public static final int DEFAULTYDIR = 2;
 	
 	int xDir;
 	int yDir;
