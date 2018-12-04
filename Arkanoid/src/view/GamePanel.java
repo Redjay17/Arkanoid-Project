@@ -63,10 +63,6 @@ public class GamePanel extends JPanel {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					commands.add(Command.ENTER);
 				}
-				for(Command c: commands)
-					System.out.println(c);
-				if(!commands.isEmpty())
-					System.out.println("--------");
 			}
 
 			@Override
@@ -124,12 +120,21 @@ public class GamePanel extends JPanel {
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, Controller.FIELDWIDTH, Controller.FIELDLENGTH);
 		g.setColor(new Color(113, 255, 137));
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
-		g.drawString("You Actually beat it.", 50, 150);
-		g.drawString("Nice.", 185, 210);
-
-		g.setFont(new Font("serif", Font.BOLD, 35));
-		g.drawString("press Enter to restart", 80, 300);
+		if(!GameInfo.getBricks().isEmpty()) {
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+			g.drawString("You Actually beat it.", 50, 150);
+			g.drawString("Nice.", 185, 210);
+		
+			g.setFont(new Font("serif", Font.BOLD, 35));
+			g.drawString("Press Enter to restart", 80, 300);
+		} else {
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 25));
+			g.setColor(Color.black);
+			g.drawString("Game cannot be played without a map", 40, 150);
+		
+			g.setFont(new Font("serif", Font.PLAIN, 25));
+			g.drawString("Please choose another map.", 90, 300);
+		}
 
 	}
 
