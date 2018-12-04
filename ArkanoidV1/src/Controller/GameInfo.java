@@ -2,56 +2,59 @@ package Controller;
 
 import java.util.ArrayList;
 
-import Command.Command;
 import Model.Ball;
 import Model.Brick;
-import Model.Map_CS151;
-import Model.Map_Cadence;
-import Model.Map_OWO;
+
 import Model.Model;
 import Model.Player;
 import Model.Rect;
-import View.View;
-import ValveResponse.ValveResponse;
 
 
+
+/**
+ * This class gets information from Model and stores it. It is then used to be taken from View
+ * @author Arman Sandher
+ *
+ */
 public class GameInfo 
 {
 	public Model model = new Model();
 	
-	static ArrayList<Brick> Bricks = null;
-	static boolean IsAlive = false;
-	static ArrayList<Rect> Objects = null;
+	static ArrayList<Brick> Bricks = new ArrayList<Brick>();
+	static boolean IsAlive = true;
+	static ArrayList<Rect> Objects = new ArrayList<Rect>();
 	static boolean Win = false;
-	static Player Player = null;
-	static Ball Ball = null;
-	static int Score = -1;
+	static Player Player = new Player();
+	static Ball Ball = new Ball(Player);
+	static int Score = 0;
 
-
-
-
-//	ArrayList<Brick> Bricks, boolean IsAlive, 
-//	ArrayList<Rect> Objects, boolean win, Player Player, Ball Ball,
-//	Model Score
 	
 	/**
 	 * Game View object in Controller to keep all the inforamtion in Model and pass it onto View
-	 * @param Bricks
-	 * @param IsAlive
-	 * @param Objects
-	 * @param Win
+	 =
 	 */
 	public GameInfo()
 	{
-		Bricks = model.getBricks();
-		Objects = model.getObjects();
-		IsAlive = model.getAlive();
-		Win = model.getWon();
-		Player = model.getPlayer();
-		Ball  = model.getBall();
-		Score = model.getScore();
+		Bricks = Model.getBricks();
+		Objects = Model.getObjects();
+		IsAlive = Model.getAlive();
+		Win = Model.getWon();
+		Player = Model.getPlayer();
+		Ball  = Model.getBall();
+		Score = Model.getScore();
 	}
 	
+	
+	/**
+	 * As the name implies, it updates the information stored in Model
+	 * @param bricks
+	 * @param isAlive
+	 * @param objects
+	 * @param win
+	 * @param player
+	 * @param ball
+	 * @param score
+	 */
 	public static void Update(ArrayList<Brick> bricks, boolean isAlive, ArrayList<Rect> objects,
 			boolean win, Player player, Ball ball, int score)
 	{
@@ -64,75 +67,56 @@ public class GameInfo
 		Score = score;
 	}
 	
-	public ArrayList<Brick> getBricks()
+	
+	
+	/**
+	 * Creates a new Arraylist just to make sure that games with more than one try have only
+	 * the basic components: Ball and Player
+	 * @return
+	 */
+	public static ArrayList<Rect> getObjects()
+	{
+		ArrayList<Rect> Objects = new ArrayList<Rect>();
+		Objects.add(Player);
+		Objects.add(Ball);
+		return Objects;
+	}
+	
+	//The rest are getter methods for their respective variables.
+	
+	public static ArrayList<Brick> getBricks()
 	{
 		return Bricks;
 	}
 	
-	public boolean getAlive()
-	{
-		return IsAlive;
-	}
 	
-	public ArrayList<Rect> getObjects()
-	{
-		return Objects;
-	}
-	
-	public boolean getWon()
+	public static boolean getWon()
 	{
 		return Win;
 	}
 	
-	public Player getPlayer()
+	
+	public static boolean getAlive()
+	{
+		return IsAlive;
+	}
+	
+	
+	public static Player getPlayer()
 	{
 		return Player;
 	}
 	
-	public Ball getBall()
+	
+	public static Ball getBall()
 	{
 		return Ball;
 	}
 	
-	public int getScore()
+	
+	public static int getScore()
 	{
 		return Score;
 	}
-	
-	public void setBricks()
-	{
-		Bricks = model.getBricks();
-	}
-	
-	public void setAlive()
-	{
-		Objects = model.getObjects();
-	}
-	
-	public void setObjects()
-	{
-		IsAlive = model.getAlive();
-	}
-	
-	public void setWon()
-	{
-		Win = model.getWon();
-	}
-	
-	public void setPlayer()
-	{
-		Player = model.getPlayer();
-	}
-	
-	public void setBall()
-	{
-		Ball  = model.getBall();
-	}
-	
-	public void setScore()
-	{
-		Score = model.getScore();
-	}
-	
 	
 }

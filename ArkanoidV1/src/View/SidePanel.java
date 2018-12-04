@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import Controller.GameInfo;
+
 /**
  * handles writing of the score, or anything involving text for that matter
  * 
@@ -33,6 +35,8 @@ public class SidePanel extends JPanel {
 	// displays the score
 	public void paint(Graphics gr) {
 		Graphics2D g = (Graphics2D) gr;
+		//Update Score based on GameInfo from controller
+		score = GameInfo.getScore();
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, 1000, 1000);
 		g.setColor(guiColor);

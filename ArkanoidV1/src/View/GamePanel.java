@@ -12,6 +12,7 @@ import java.util.PriorityQueue;
 
 import javax.swing.JPanel;
 
+import Controller.GameInfo;
 import Command.Command;
 import Controller.Controller;
 import Model.Ball;
@@ -60,7 +61,15 @@ public class GamePanel extends JPanel implements KeyListener {
 
 	public void paint(Graphics gr) {
 		Graphics2D g = (Graphics2D) gr;
-
+		
+		//Refresh the View with Controller's GameInfo
+		objects = GameInfo.getObjects();
+		bricks = GameInfo.getBricks();
+		alive = GameInfo.getAlive();
+		won = GameInfo.getWon();
+		player = GameInfo.getPlayer();
+		ball = GameInfo.getBall();
+		
 		// "refreshes" the screen with a new "layer" of paint. Take this off and see
 		// what happens
 		g.setColor(backgroundColor);

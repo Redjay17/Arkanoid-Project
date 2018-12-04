@@ -14,14 +14,14 @@ import Controller.GameInfo;
  */
 public class Model {
 
-	Player player = new Player();
-	Ball ball = new Ball(player);
-	boolean alive = true;
+	static Player player = new Player();
+	static Ball ball = new Ball(player);
+	static boolean alive = true;
 	boolean firstShot = false;
-	boolean won = false;
-	int score = 0;
+	static boolean won = false;
+	static int score = 0;
 	Map map;
-	ArrayList<Brick> bricks;
+	static ArrayList<Brick> bricks;
 	
 	public static int borderThickness = 0;
 	public int maxBallDown = Controller.fieldPanelLength - ball.getLength();
@@ -31,7 +31,7 @@ public class Model {
 	public final int maxPlayerRightX = Controller.fieldPanelLength - player.getWidth() - borderThickness;
 
 
-	public ArrayList<Rect> getObjects() {
+	public static ArrayList<Rect> getObjects() {
 		ArrayList<Rect> objects = new ArrayList<Rect>();
 		objects.add(player);
 		objects.add(ball);
@@ -39,7 +39,7 @@ public class Model {
 
 	}
 
-	public ArrayList<Brick> getBricks() {
+	public static ArrayList<Brick> getBricks() {
 		return bricks;
 
 	}
@@ -217,23 +217,23 @@ public class Model {
 		}
 	}
 
-	public Player getPlayer() {
+	public static Player getPlayer() {
 		return player;
 	}
 
-	public Ball getBall() {
+	public static Ball getBall() {
 		return ball;
 	}
 
-	public boolean getAlive() {
+	public static boolean getAlive() {
 		return alive;
 	}
 
-	public boolean getWon() {
+	public static boolean getWon() {
 		return won;
 	}
 
-	public int getScore() {
+	public static int getScore() {
 		return score;
 	}
 
