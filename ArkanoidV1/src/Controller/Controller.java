@@ -126,17 +126,8 @@ public class Controller implements ActionListener {
 		
 		GameInfo.Update(Model.getBricks(), Model.getAlive(), Model.getObjects(),
 				Model.getWon(), Model.getPlayer(), Model.getBall(), Model.getScore());
-//		view.getGameView().setObjects(model.getObjects());
-//		view.getGameView().setBricks((model.getBricks()));
-//		view.getGameView().setAlive(model.getAlive());
-//		view.getGameView().setWon(model.getWon());
-//		view.getGameView().setPlayer(model.getPlayer());
-//		view.getGameView().setBall(model.getBall());
-		view.getGameView().repaint();
 
-		//feeds information to model so model can repaint
-		
-//		view.getSidePanel().setScore(model.getScore());
+		view.getGameView().repaint();
 		view.getSidePanel().repaint();
 
 		//return ValveResponse.EXECUTED;
