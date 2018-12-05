@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"main","l":"Action"},{"p":"entities","l":"Ball"},{"p":"entities","l":"Block"},{"p":"entities","l":"Boundary"},{"p":"main","l":"Controller"},{"p":"main","l":"Main"},{"p":"main","l":"Model"},{"p":"entities","l":"Paddle"},{"p":"powerups","l":"PowerUp"},{"p":"main","l":"View"}]
