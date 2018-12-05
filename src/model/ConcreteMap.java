@@ -1,7 +1,12 @@
 package model;
 
 import java.util.ArrayList;
-
+/**
+ * ConcreteMap implements the interface map. 
+ * All maps created in the maps package extends 
+ * @author Matthew
+ *
+ */
 public abstract class ConcreteMap implements Map {
 	private ArrayList<Block> blockMap;
 	
@@ -11,7 +16,7 @@ public abstract class ConcreteMap implements Map {
 	}
 	
 	public ArrayList<Block> getMap(){
-		return this.blockMap;
+		return new ArrayList<Block>(this.blockMap);
 	}
 	
 	public void resetMap() {

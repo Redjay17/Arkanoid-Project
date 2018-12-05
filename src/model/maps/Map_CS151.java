@@ -1,11 +1,9 @@
 package model.maps;
 
 /**
- * A map that draws a 
+ * A map that draws the class's name.
  * @author Leo_Le
  */
-
-import java.util.ArrayList;
 
 import model.ConcreteMap;
 
