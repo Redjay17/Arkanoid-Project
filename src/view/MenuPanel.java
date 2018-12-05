@@ -38,7 +38,7 @@ public class MenuPanel extends JPanel {
 		this.add(filled);
 		this.add(diamond);
 		this.add(cadance);
-		this.add(nothing);
+		//this.add(nothing);
 		this.add(random);
 	}
 

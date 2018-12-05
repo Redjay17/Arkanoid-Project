@@ -18,6 +18,7 @@ public class GameInfo {
 	private static Ball ball;
 	private static int score;
 	private static int lives;
+	private static boolean firstInstructions = true;
 
 	private static boolean isAlive;
 	private static boolean win;
@@ -94,9 +95,17 @@ public class GameInfo {
 	public static int getLives() {
 		return lives;
 	}
+	
+	public static boolean getFirstInstructions() {
+		return firstInstructions;
+	}
 
 	public static boolean getHasShot() {
 		return hasShot;
+	}
+	
+	public static void setFirstInstructions(boolean a) {
+		firstInstructions = a;
 	}
 
 }

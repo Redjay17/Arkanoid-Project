@@ -92,13 +92,28 @@ public class GamePanel extends JPanel {
 
 		});
 	}
-
-	/**
-	 * Displays all the objects of the game.
-	 */
+	
 	public void paint(Graphics gr) {
 		Graphics2D g = (Graphics2D) gr;
-
+		
+		if(!GameInfo.getAlive())
+			this.paintDead(g);
+		else if(GameInfo.getWon())
+			this.paintWin(g);
+		else {
+			this.paintMap(g);
+			if(GameInfo.getFirstInstructions()){
+				if(!GameInfo.getHasShot()) {
+					this.paintInstructions(g);
+				} else {
+					GameInfo.setFirstInstructions(false);
+				}
+			}
+		}
+		
+	}
+	
+	public void paintMap(Graphics2D g) {
 		// "refreshes" the screen with a new "layer" of paint. Take this off and see
 		// what happens
 		g.setColor(backgroundColor);
@@ -115,25 +130,9 @@ public class GamePanel extends JPanel {
 			g.setColor(rect.getColor());
 			g.fillRect(rect.getX(), rect.getY(), rect.getWidth(), rect.getLength());
 		}
-
-		if (!GameInfo.getAlive())
-			paintDead(g);
-
-		if (GameInfo.getWon())
-			paintWin(g);
-		
-		if(!(GameInfo.getHasShot()) && GameInfo.getLives() == 3){
-			paintInstructions(g);
-		}
 	}
 
-	public void paintInstructions(Graphics2D g) {
-		g.setColor(Color.black);
-		g.setFont(new Font("TimesRoman", Font.BOLD, 20));
-		g.drawString("<-- Move with arrow keys --> ", 120, 400);
-		g.drawString("Launch the ball with space bar. ", 120, 425);
-	}
-
+	
 	public void paintWin(Graphics2D g) {
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, Controller.FIELDWIDTH, Controller.FIELDLENGTH);
@@ -166,4 +165,12 @@ public class GamePanel extends JPanel {
 		g.setFont(new Font("serif", Font.BOLD, 30));
 		g.drawString("press Enter to restart", 110, 250);
 	}
+	
+	public void paintInstructions(Graphics2D g) {
+		g.setColor(Color.black);
+		g.setFont(new Font("TimesRoman", Font.BOLD, 20));
+		g.drawString("<-- Move with arrow keys --> ", 120, 400);
+		g.drawString("Launch the ball with space bar. ", 120, 425);
+	}
+
 }
