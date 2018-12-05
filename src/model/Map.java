@@ -13,5 +13,8 @@ import java.util.ArrayList;
  *
  */
 public interface Map {
-	public ArrayList<Block> getBricks();
+	public ArrayList<Block> getMap();
+	public void resetMap();
+	public void createMap();
+	public void addBlock(int x, int y);
 }

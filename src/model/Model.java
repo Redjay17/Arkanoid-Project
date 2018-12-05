@@ -66,7 +66,7 @@ public class Model {
 	public void loadMap(Map map) {
 		this.map = map;
 		// clear the arraylist so it doesn't stack with bricks
-		this.bricks = new ArrayList<Block>(map.getBricks());
+		this.bricks = map.getMap();
 		this.alive = false;
 		this.restart();
 	}
@@ -88,10 +88,9 @@ public class Model {
 
 			if (this.hasWon)
 				this.hasWon = false;
+			
 			this.lives = DEFAULTLIVES;
-
-			for (Block brick : this.bricks)
-				brick.resetLives();
+			this.map.resetMap();
 
 		} else {
 			System.out.println("alive");

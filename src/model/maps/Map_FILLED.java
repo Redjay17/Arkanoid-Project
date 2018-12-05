@@ -1,22 +1,11 @@
 package model.maps;
 
-import java.util.ArrayList;
+import model.ConcreteMap;
 
-import model.Block;
-import model.Map;
-
-public class Map_FILLED implements Map {
-	ArrayList<Block> bricks = new ArrayList<Block>();
-	@Override
-	public ArrayList<Block> getBricks() {
-		return bricks;
-	}
-	public Map_FILLED() {
-		bricks = new ArrayList<Block>();
-		
+public class Map_FILLED extends ConcreteMap {
+	public void createMap() {
 		for(int y = 0; y < 25; y++)
 			for(int x = 0; x < 34; x++)
-				bricks.add(new Block(x*15, y*15));
-
+				this.addBlock(x*15, y*15);
 	}
 }
