@@ -20,9 +20,10 @@ public class SidePanel extends JPanel {
 	public static final int SIDEVIEWWIDTH = 150;
 
 	public SidePanel() {
-		setLayout(new FlowLayout());
-		setPreferredSize(new Dimension(SIDEVIEWWIDTH, SIDEVIEWLENGTH));
-		setBorder(BorderFactory.createBevelBorder(0));
+		this.setLayout(new FlowLayout());
+		this.setMinimumSize(new Dimension(SIDEVIEWWIDTH, SIDEVIEWLENGTH));
+		this.setPreferredSize(new Dimension(SIDEVIEWWIDTH, SIDEVIEWLENGTH));
+		this.setBorder(BorderFactory.createRaisedBevelBorder());
 	}
 
 	Color backgroundColor = Color.white;
@@ -32,7 +33,7 @@ public class SidePanel extends JPanel {
 	public void paint(Graphics gr) {
 		Graphics2D g = (Graphics2D) gr;
 		g.setColor(backgroundColor);
-		g.fillRect(0, 0, 1000, 1000);
+		g.fillRect(0, 0, SIDEVIEWWIDTH, SIDEVIEWLENGTH);
 		g.setColor(guiColor);
 		g.setFont(new Font("serif", Font.BOLD, 35));
 

@@ -1,12 +1,15 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import controller.Controller;
 import model.maps.*;
 /*
  * Menu contains buttons for some of the game's options as well as a console
@@ -18,10 +21,20 @@ public class MenuPanel extends JPanel {
 	public static final int MENULENGTH = 100;
 	
 	public MenuPanel() {
-		this.setLayout(new FlowLayout());
+		this.setLayout(new BorderLayout());
 		this.setBorder(BorderFactory.createLoweredBevelBorder());
 		this.setBackground(Color.white); // Temporary.
+		this.setMinimumSize(new Dimension(MENUWIDTH, MENULENGTH));
 		this.setPreferredSize(new Dimension(MENUWIDTH, MENULENGTH));
+		
+		this.add(MenuPanel.createLeftPanel(), BorderLayout.CENTER);
+		this.add(MenuPanel.createRightPanel(), BorderLayout.EAST);
+	}
+	
+	private static JPanel createLeftPanel() {
+		JPanel leftPanel = new JPanel();
+		leftPanel.setPreferredSize(new Dimension(Controller.FIELDWIDTH, MENULENGTH));
+		leftPanel.setLayout(new FlowLayout());
 
 		MapButton owo = new MapButton("Load Face Map", new Map_OWO());
 		MapButton cs151 = new MapButton("Load Default Map", new Map_CS151());
@@ -31,12 +44,49 @@ public class MenuPanel extends JPanel {
 		MapButton nothing = new MapButton("Load An Empty Map", new Map_Nothing());
 		MapButton random = new MapButton("Load Random Map", new Map_Random());
 		
-		this.add(owo);
-		this.add(cs151);
-		this.add(filled);
-		this.add(diamond);
-		this.add(cadance);
-		this.add(nothing);
-		this.add(random);
+		//Actual maps
+		leftPanel.add(owo);
+		leftPanel.add(cs151);
+		leftPanel.add(cadance);
+		
+		//Code Maps
+		leftPanel.add(filled);
+		leftPanel.add(diamond);
+		leftPanel.add(nothing);
+		leftPanel.add(random);
+		
+		return leftPanel;
+	}
+	
+	private static JPanel createRightPanel() {
+		JPanel rightPanel = new JPanel();
+		rightPanel.setPreferredSize(new Dimension(SidePanel.SIDEVIEWWIDTH, MENULENGTH));
+		rightPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+		
+		JButton pauseButton = new JButton();
+		pauseButton.setText("Pause");
+		
+		JButton resumeButton = new JButton();
+		resumeButton.setText("Resume");
+		
+		resumeButton.setEnabled(false);
+		
+		JButton resetButton = new JButton();
+		resetButton.setText("Reset");
+		
+		pauseButton.setPreferredSize(new Dimension(SidePanel.SIDEVIEWWIDTH, 25));
+		resumeButton.setPreferredSize(new Dimension(SidePanel.SIDEVIEWWIDTH, 25));
+		resetButton.setPreferredSize(new Dimension(SidePanel.SIDEVIEWWIDTH, 25));
+		
+		pauseButton.setBackground(Color.white);
+		resumeButton.setBackground(Color.white);
+		resetButton.setBackground(Color.white);
+		
+		
+		rightPanel.add(pauseButton);
+		rightPanel.add(resumeButton);
+		rightPanel.add(resetButton);
+		
+		return rightPanel;
 	}
 }

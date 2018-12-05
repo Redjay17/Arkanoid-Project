@@ -26,6 +26,7 @@ public class GamePanel extends JPanel {
 	public static Color borderColor = new Color(66, 66, 66);
 
 	public GamePanel() {
+		this.setMinimumSize(new Dimension(Controller.FIELDWIDTH, Controller.FIELDLENGTH));
 		this.setPreferredSize(new Dimension(Controller.FIELDWIDTH, Controller.FIELDLENGTH));
 		this.addKeyListener(new KeyListener() {
 			
@@ -91,7 +92,16 @@ public class GamePanel extends JPanel {
 
 	public void paint(Graphics gr) {
 		Graphics2D g = (Graphics2D) gr;
-
+		
+		if(!GameInfo.getAlive())
+			paintDead(g);
+		else if(GameInfo.getWon())
+			paintWin(g);
+		else
+			paintMap(g);
+	}
+	
+	public void paintMap(Graphics2D g) {
 		// "refreshes" the screen with a new "layer" of paint. Take this off and see
 		// what happens
 		g.setColor(backgroundColor);
@@ -102,25 +112,20 @@ public class GamePanel extends JPanel {
 			g.setColor(brick.getColor());
 			g.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getLength());
 		}
-				
+
 		// paints the player
 		for (Rect rect : GameInfo.getObjects()) {
 			g.setColor(rect.getColor());
 			g.fillRect(rect.getX(), rect.getY(), rect.getWidth(), rect.getLength());
 		}
-		
-		if(!GameInfo.getAlive())
-			paintDead(g);
-		
-		if(GameInfo.getWon())
-			paintWin(g);
 	}
 	
 	public void paintWin(Graphics2D g) {
 		g.setColor(backgroundColor);
 		g.fillRect(0, 0, Controller.FIELDWIDTH, Controller.FIELDLENGTH);
-		g.setColor(new Color(113, 255, 137));
-		if(!GameInfo.getBricks().isEmpty()) {
+		g.setColor(Color.black);
+		
+		if(!GameInfo.getBricks().isEmpty()) {	
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
 			g.drawString("You Actually beat it.", 50, 150);
 			g.drawString("Nice.", 185, 210);
@@ -129,7 +134,6 @@ public class GamePanel extends JPanel {
 			g.drawString("Press Enter to restart", 80, 300);
 		} else {
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 25));
-			g.setColor(Color.black);
 			g.drawString("Game cannot be played without a map", 40, 150);
 		
 			g.setFont(new Font("serif", Font.PLAIN, 25));
@@ -139,13 +143,13 @@ public class GamePanel extends JPanel {
 	}
 
 	public void paintDead(Graphics2D g) {
-		g.setColor(Color.black);
+		g.setColor(backgroundColor);
 		g.fillRect(0, 0, Controller.FIELDWIDTH, Controller.FIELDLENGTH);
-		g.setColor(Color.red);
+		g.setColor(Color.black);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 80));
-		g.drawString("YOU DIED", 50, 200);
+		g.drawString("Game Over", 50, 200);
 
 		g.setFont(new Font("serif", Font.BOLD, 30));
 		g.drawString("press Enter to restart", 110, 250);
-}
+	}
 }

@@ -24,8 +24,8 @@ public class View extends JFrame {
 
 	// MAKE 100% ABSOLUTELY SURE THAT FIELDPANELENGTH AND FIELDPANEWITH ARE
 	// USED TO CONSTRUCT THE JPANEL WHERE THE GAME IS PLAYED
-	public static final int VIEWLENGTH = 600;
-	public static final int VIEWWIDTH = 650;
+	public static final int VIEWLENGTH = MenuPanel.MENULENGTH + SidePanel.SIDEVIEWLENGTH;
+	public static final int VIEWWIDTH = MenuPanel.MENUWIDTH + 13;
 
 	PriorityQueue<Command> commands = Controller.commands;
 
@@ -46,7 +46,6 @@ public class View extends JFrame {
 	public void start() {
 		this.setTitle("Arkanoid");
 		this.setLayout(new BorderLayout());
-		this.setPreferredSize(new Dimension(VIEWWIDTH, VIEWLENGTH));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);
 		
