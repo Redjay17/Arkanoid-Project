@@ -3,7 +3,7 @@ package controller;
 import model.Model;
 
 /**
- * a valve for the Enter command
+ * A Valve implemented for the ENTER Command
  * @author Arman Sandher
  *
  */
@@ -12,6 +12,10 @@ public class EnterValve implements Valve{
 	private Model model;
 	
 	
+	/**
+	 * Constructor for EnterValve.
+	 * @param model
+	 */
 	public EnterValve(Model model)
 	{
 		this.model = model;

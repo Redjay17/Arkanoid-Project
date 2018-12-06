@@ -3,7 +3,7 @@ package controller;
 import model.Model;
 
 /**
- * a valve for the Left command
+ * A Valve implemented for the LEFTSTART Command
  * @author Arman Sandher
  *
  */
@@ -13,6 +13,10 @@ public class LeftValve implements Valve
 	private Model model;
 	
 	
+	/**
+	 * Constructor for LeftValve.
+	 * @param model
+	 */
 	public LeftValve(Model model)
 	{
 		this.model = model;

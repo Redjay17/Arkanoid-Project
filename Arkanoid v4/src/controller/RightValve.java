@@ -3,7 +3,7 @@ package controller;
 import model.Model;
 
 /**
- * a valve for the Right command
+ * A Valve implemented for the RIGHTSTART Command
  * @author Arman Sandher
  *
  */
@@ -12,6 +12,10 @@ public class RightValve implements Valve{
 	private Model model;
 	
 	
+	/**
+	 * Constructor for RightValve.
+	 * @param model
+	 */
 	public RightValve(Model model)
 	{
 		this.model = model;

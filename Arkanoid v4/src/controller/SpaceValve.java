@@ -3,7 +3,7 @@ package controller;
 import model.Model;
 
 /**
- * a valve for the Space command
+ * A Valve implemented for the SPACE Command
  * @author Arman Sandher
  *
  */
@@ -12,6 +12,10 @@ public class SpaceValve implements Valve{
 	private Model model;
 	
 	
+	/**
+	 * Constructor for SpaceValve.
+	 * @param model
+	 */
 	public SpaceValve(Model model)
 	{
 		this.model = model;

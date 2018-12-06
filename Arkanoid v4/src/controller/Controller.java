@@ -53,8 +53,11 @@ public class Controller implements Valve{
 		t.start();
 	}
 
+	/**
+	 * the game loop takes a Queue of commands and processes each of them in
+	 * execute. then it updates View.
+	 */
 	public void gameLoop() {
-		//while(currentCommand != Command.EXIT) {
 		model.calculate();
 		if (!commands.isEmpty()) {
 			currentCommand = commands.remove();
@@ -71,7 +74,8 @@ public class Controller implements Valve{
 	}
 	
 	/**
-	 * valves instead of if's or cases
+	 * The Execute Method that goes through the array data,
+	 * and executes whichever command is in message
 	 */
 	@Override
 	public ValveResponse execute(Command message)
@@ -85,6 +89,7 @@ public class Controller implements Valve{
 	
 	/**
 	 * initialize the valves in the other classes based on model
+	 * and put them into an array to process through in execute
 	 */
 	public void initializeClassVariable()
 	{

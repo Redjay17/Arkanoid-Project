@@ -33,7 +33,9 @@ public class GameInfo {
 	}
 
 	/**
-	 * As the name implies, it updates the information stored in Model
+	 * 
+	 * This class updates  the information stored in GameInfo based on
+	 * the information stored in Model.
 	 * 
 	 * @param bricks
 	 * @param isAlive
@@ -59,42 +61,73 @@ public class GameInfo {
 	 * Creates a new ArrayList just to make sure that games with more than one try
 	 * have only the basic components: Ball and Player
 	 * 
-	 * @return
+	 * @return objects
 	 */
 	public static ArrayList<Rect> getObjects() {
 		return objects;
 	}
 
-	// The rest are getter methods for their respective variables.
-
+		
+	/**
+	 * Getter Method for bricks
+	 * @return bricks
+	 */
 	public static ArrayList<Block> getBricks() {
 		return bricks;
 	}
 
+	/**
+	 * Getter Method for win
+	 * @return win
+	 */
 	public static boolean getWon() {
 		return win;
 	}
 
+	/**
+	 * Getter Method for isAlive
+	 * @return isAlive
+	 */
 	public static boolean getAlive() {
 		return isAlive;
 	}
 
+	/**
+	 * Getter Method for player
+	 * @return player
+	 */
 	public static Player getPlayer() {
 		return player;
 	}
 
+	/**
+	 * Getter Method for ball
+	 * @return ball
+	 */
 	public static Ball getBall() {
 		return ball;
 	}
 
+	/**
+	 * Getter Method for score
+	 * @return
+	 */
 	public static int getScore() {
 		return score;
 	}
-
+	
+	/**
+	 * Getter Method for lives
+	 * @return lives
+	 */
 	public static int getLives() {
 		return lives;
 	}
 
+	/**
+	 * Getter Method for hasShot
+	 * @return hasShot
+	 */
 	public static boolean getHasShot() {
 		return hasShot;
 	}

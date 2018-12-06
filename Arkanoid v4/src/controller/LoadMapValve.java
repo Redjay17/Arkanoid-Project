@@ -3,7 +3,7 @@ package controller;
 import model.Model;
 
 /**
- * a valve for the Load map command
+ * A Valve implemented for the LOADMAP Command
  * @author Arman Sandher
  *
  */
@@ -12,6 +12,10 @@ public class LoadMapValve implements Valve{
 	private Model model;
 	
 	
+	/**
+	 * Constructor for LoadMapValve.
+	 * @param model
+	 */
 	public LoadMapValve(Model model)
 	{
 		this.model = model;
